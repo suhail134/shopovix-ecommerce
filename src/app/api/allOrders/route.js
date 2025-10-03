@@ -1,24 +1,3 @@
-// import Order from "@/models/Orders";
-// import connectDB from "@/db/connectDB";
-// import { NextResponse } from "next/server";
-
-// export async function GET(req){
-//   await connectDB();
-//   try {
-//   const returnRequests = await Order.find({ returnStatus: "pending" });
-//     const allorders=await Order.find().sort({createdAt:-1});
-//     if (!allorders || allorders.length === 0) {
-//       return NextResponse.json({ success: false, message: "No orders found" });
-//     }
-
-//     return NextResponse.json({success:true,allorders,returnRequests})
-//   } catch (error) {
-//     return NextResponse.json({success:false,message:error.message})
-//   }
-// }
-
-
-
 import Order from "@/models/Orders";
 import connectDB from "@/db/connectDB";
 import { NextResponse } from "next/server";

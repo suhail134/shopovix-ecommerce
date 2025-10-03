@@ -7,7 +7,7 @@ import Script from "next/script";
 import { ChevronDown, ChevronUp, LoaderCircle } from "lucide-react";
 import { set } from "mongoose";
 
-const page = () => {
+const Page = () => {
     const [form, setForm] = useState({
         email: "",
         number: "",
@@ -416,4 +416,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

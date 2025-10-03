@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import ReviewsDisplay from "@/component/CustomerReviews";
 import { useRouter } from 'next/navigation';
 import { LoaderCircle, Camera, AlertTriangle } from 'lucide-react';
-const page = () => {
+const Page = () => {
 
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -245,4 +245,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

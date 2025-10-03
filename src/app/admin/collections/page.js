@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useState } from 'react'
-const page = () => {
+const Page = () => {
 
 
   return (
@@ -50,4 +50,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

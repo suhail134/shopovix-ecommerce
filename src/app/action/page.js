@@ -1,5 +1,5 @@
 "use server"
-export const initiate = async (amount, form, products, customerName,customerAddress) => {
+export const Initiate = async (amount, form, products, customerName,customerAddress) => {
   try {
     const res = await fetch("/api/customer", {
       method: "POST",

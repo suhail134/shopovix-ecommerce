@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Loader } from "lucide-react";
 
-const page = () => {
+const Page = () => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const searchParams = useSearchParams();
@@ -167,4 +167,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
