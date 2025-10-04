@@ -31,7 +31,7 @@ export default function ThankYouPage() {
   const address = searchParams.get("address") || "Your provided address";
 
   return (
-    <Suspense  fallback={<div className="flex justify-center items-center h-96"> <Loader className="animate-spin w-12 h-12 text-blue-500" />
+    <Suspense  fallback={<div className="flex justify-center items-center h-96">
         <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
      </div>}>
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-4">

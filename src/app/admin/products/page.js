@@ -108,7 +108,7 @@ const Page = () => {
             {/* IMAGE */}
             <div className="h-52 w-full overflow-hidden rounded-xl mb-4 group relative">
               <img
-                src={product.product_image[0] || product.product_image[1]}
+                src={product.product_image[0]?.url || product.product_image[1]?.url || "/placeholder.png"}
                 alt={product.product_title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />

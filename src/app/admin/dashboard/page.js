@@ -28,19 +28,19 @@ const AdminDashboard = () => {
             .then(res => res.json())
             .then(data => setCollection(data.collection || []));
     }, []);
-
-    useEffect(() => {
-        fetch("/api/order")
-            .then(res => res.json())
-            .then(data => {
-                if (data.success && data.orders) {
-                    setOrders(data.orders);
-                } else {
-                    setOrders([]);
-                }
-            })
-            .catch(err => console.error("Error fetching orders:", err));
-    }, []);
+ useEffect(() => {
+    fetch("/api/allOrders")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.allorders) {
+          setOrders(data.allorders);
+           setLoading(false);
+        } else {
+          setOrders([]);
+        }
+      })
+      .catch((err) => console.error("Error fetching orders:", err));
+  }, []);
 
     useEffect(() => {
         fetch("/api/products")
@@ -50,8 +50,10 @@ const AdminDashboard = () => {
 
     // COD orders count
     const codOrders = orders.filter(order => order.paymentMethod === "COD");
-    // ONLINE orders count
+    // // ONLINE orders count
     const onlineOrders = orders.filter(order => order.paymentMethod === "ONLINE");
+
+
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white p-4 md:p-8">

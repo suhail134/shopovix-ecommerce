@@ -20,10 +20,12 @@ const ProductSchema = new mongoose.Schema({
         // required: true
     },
 
-    product_image: {
-        type: [String], // URL store karega
-        required: true
-    },
+    product_image: [
+        {
+            url: { type: String, required: true },
+            public_id: { type: String, required: true }
+        }
+    ],
     category: {
         type: String,
         required: true

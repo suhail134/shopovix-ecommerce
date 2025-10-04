@@ -219,7 +219,7 @@ const Page = () => {
     return (
         <Suspense fallback={
             <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
-                <Loader className="animate-spin text-blue-600 w-20 h-20" />
+                <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
             </div>
         }>
             {payLoading && (

@@ -45,7 +45,7 @@ const Navbar = () => {
         </div>
 
         {/* Logo center */}
-        <div className="flex-1 relative lg:bottom-1 lg:justify-start sm:justify-start flex justify-center">
+        <div className="flex-1 z-40 cursor-pointer relative lg:bottom-1 lg:justify-start sm:justify-start flex justify-center">
           <Link href={"/"} className="flex-shrink-0">
             <img className="w-28 sm:w-28 rounded-lg" src="/logo.png" alt="logo" />
           </Link>
@@ -86,7 +86,7 @@ const Navbar = () => {
           <Searchbar />
         </div>
 
-<div className="signup">
+<div className="signup  hidden ">
       {/* Admin Panel / Signup*/}
           <Link  href="/signUp" className=" bg-blue-600 text-white  px-4 py-2 rounded-lg hover:bg-blue-700 transition relative bottom-20 sm:right-40 md:right-40 flex gap-1 items-center">
           <button className="cursor-pointer" >SignUp</button>
