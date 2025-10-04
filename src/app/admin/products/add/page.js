@@ -143,13 +143,14 @@ const removeNewImage = (index) => {
   const categories = [...new Set(collection.map(c => c.category))];
 
   return (
-    <Suspense fallback={<div className="flex justify-center items-center h-96"> <LoaderCircle className="animate-spin w-12 h-12 text-blue-500" />
+    <Suspense fallback={<div className="flex justify-center items-center h-96"><LoaderCircle className="animate-spin w-12 h-12 text-blue-600" />
     </div>}>
       {loading && (
         <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
           <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
         </div>
       )}
+
       <div className="p-6 max-w-4xl mx-auto min-h-screen z-50 bg-gray-100">
         <style jsx global>{`
         html,
