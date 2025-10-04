@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Script from "next/script";
 import { ChevronDown, ChevronUp, LoaderCircle } from "lucide-react";
 import { set } from "mongoose";
-
+import { Suspense } from "react";
 const Page = () => {
     const [form, setForm] = useState({
         email: "",
@@ -214,7 +214,11 @@ const Page = () => {
     if (!products.length) return <p className="text-center mt-10">Loading...</p>;
 
     return (
-        <>
+        <Suspense fallback={
+            <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
+                <Loader className="animate-spin text-blue-600 w-20 h-20" />
+            </div>
+        }>
             {payLoading && (
                 <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
                     <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
@@ -412,7 +416,7 @@ const Page = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </Suspense>
     );
 };
 

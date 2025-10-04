@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Loader } from "lucide-react";
+import { Suspense } from 'react'
 
 const Page = () => {
   const [products, setProducts] = useState([])
@@ -61,6 +62,7 @@ const Page = () => {
     item?.product_title?.toLowerCase().includes(search.toLowerCase()) || item?.product_desc?.toLowerCase().includes(search.toLowerCase()) || item?.category?.toLowerCase().includes(search.toLowerCase()) || item?._id?.toLowerCase().includes(search.toLowerCase())
   )
   return (
+    <Suspense fallback={<div className="flex justify-center items-center h-96"> <Loader className="animate-spin w-12 h-12 text-blue-500" /> </div>}>
     <div className="p-6">
 
       {/* HEADER */}
@@ -163,7 +165,7 @@ const Page = () => {
         ))}
       </div></>)}
     </div>
-
+</Suspense>
   )
 }
 

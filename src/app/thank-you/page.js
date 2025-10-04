@@ -4,7 +4,8 @@ import Link from "next/link";
 import { CheckCircle, Truck, ArrowRight } from "lucide-react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-
+import { Suspense } from "react";
+import { LoaderCircle } from "lucide-react";
 export default function ThankYouPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -27,6 +28,9 @@ export default function ThankYouPage() {
   const address = searchParams.get("address") || "Your provided address";
 
   return (
+    <Suspense  fallback={<div className="flex justify-center items-center h-96"> <Loader className="animate-spin w-12 h-12 text-blue-500" />
+        <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
+     </div>}>
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-4">
       {/* Card */}
       <div className="bg-white shadow-xl rounded-2xl p-8 max-w-xl w-full text-center">
@@ -84,5 +88,6 @@ export default function ThankYouPage() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-
+import { Suspense } from "react";
 import { LoaderCircle } from "lucide-react";
 const Page = () => {
   const router = useRouter();
@@ -103,7 +103,9 @@ const Page = () => {
   };
 
   return (
-    <>
+    <Suspense   fallback={ <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
+          <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
+        </div>}>
       {loading && (
         <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
           <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
@@ -212,7 +214,7 @@ const Page = () => {
           </button>
         </form>
       </div>
-    </>
+    </Suspense>
   );
 };
 

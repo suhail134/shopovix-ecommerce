@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { LoaderCircle } from 'lucide-react'
+import { Suspense } from 'react'
 const AddProductPage = () => {
   const [form, setForm] = useState({
     title: '',
@@ -134,7 +135,8 @@ if (id && images.length === 0 && (!preview || preview.length === 0)) {
   const categories = [...new Set(collection.map(c => c.category))];
       
   return (
-    <>
+    <Suspense fallback={<div className="flex justify-center items-center h-96"> <Loader className="animate-spin w-12 h-12 text-blue-500" /> <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
+ </div>}>
       {loading && (
             <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
               <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
@@ -315,7 +317,7 @@ if (id && images.length === 0 && (!preview || preview.length === 0)) {
 
       </form>
     </div>
-    </>
+    </Suspense>
   )
 }
 

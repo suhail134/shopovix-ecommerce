@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader } from "lucide-react";
+import { Suspense } from "react";
 
 const Page = () => {
   const [collections, setCollections] = useState([]); // ✅ better naming
@@ -73,6 +74,8 @@ const Page = () => {
 );
 
   return (
+    <Suspense fallback={ <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50" > <Loader className="animate-spin text-blue-600 w-20 h-20" />
+        </div>}>
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white p-6">
       {/* Header Section */}
      {loading ? (
@@ -162,6 +165,7 @@ const Page = () => {
         </div>
       )}</>)}
     </div>
+    </Suspense >
   );
 };
 

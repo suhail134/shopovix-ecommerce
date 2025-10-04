@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import ReviewsDisplay from "@/component/CustomerReviews";
 import { useRouter } from 'next/navigation';
 import { LoaderCircle, Camera, AlertTriangle } from 'lucide-react';
+import { Suspense } from 'react'
 const Page = () => {
 
   const [product, setProduct] = useState(null)
@@ -113,7 +114,8 @@ const Page = () => {
 
   }
   return (
-    <>
+    <Suspense fallback={<div className="flex justify-center items-center h-96"> <Loader className="animate-spin w-12 h-12 text-blue-500" /> <LoaderCircle className="animate-spin text-blue-500 w-20 h-20" />
+ </div>}>
       {loading && (
         <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
           <LoaderCircle className="animate-spin text-blue-500 w-20 h-20" />
@@ -241,7 +243,7 @@ const Page = () => {
   )}
 </div>
 
-    </>
+    </Suspense>
   )
 }
 
