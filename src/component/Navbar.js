@@ -45,8 +45,8 @@ const Navbar = () => {
         </div>
 
         {/* Logo center */}
-        <div className="flex-1 z-40 cursor-pointer relative lg:bottom-1 lg:justify-start sm:justify-start flex justify-center">
-          <Link href={"/"} className="flex-shrink-0">
+        <div className="flex-1  w-[20vw] cursor-pointer relative lg:bottom-1 lg:justify-start sm:justify-start flex justify-center">
+          <Link href={"/"} className="flex-shrink-0  z-30 ">
             <img className="w-28 sm:w-28 rounded-lg" src="/logo.png" alt="logo" />
           </Link>
         </div>
