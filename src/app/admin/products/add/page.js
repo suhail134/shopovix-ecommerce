@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { LoaderCircle } from 'lucide-react'
+import { LoaderCircle,Loader } from 'lucide-react'
 import { Suspense } from 'react'
 const AddProductPage = () => {
   const [form, setForm] = useState({
