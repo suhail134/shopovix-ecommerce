@@ -132,6 +132,7 @@ const AdminDashboard = () => {
                     </div>
                 </>
             )}
+            <h1 className="text-7xl  flex justify-center items-center " >For sample only </h1>
         </div>
     );
 };
