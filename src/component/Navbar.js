@@ -86,6 +86,15 @@ const Navbar = () => {
           <Searchbar />
         </div>
 
+<div className="signup">
+      {/* Admin Panel / Signup*/}
+          <Link  href="/signUp" className=" bg-blue-600 text-white  px-4 py-2 rounded-lg hover:bg-blue-700 transition relative bottom-20 sm:right-40 md:right-40 flex gap-1 items-center">
+          <button className="cursor-pointer" >SignUp</button>
+          </Link>
+       
+</div>
+
+
 
 
         {/* Admin Panel / Logout + Admin Sidebar + Theme */}
@@ -104,18 +113,6 @@ const Navbar = () => {
           ) : (
             <>
               <div className="relative -top-2 sm:top-0 md:top-0 lg:-top-3 flex gap-3" >
-
-
-                {/* <button
-                  className="bg-red-500 text-white px-3 cursor-pointer  py-1 rounded-lg hover:bg-red-600 transition text-sm"
-                  onClick={() => {
-                    localStorage.removeItem("notlogin");
-                    setToken(null);
-                    router.push("/");
-                  }}
-                >
-                  Logout
-                </button> */}
                 <button
                   onClick={() => setAdminSidebar(true)}
                   className="flex items-center justify-center cursor-pointer  bg-yellow-500 rounded-lg p-2 hover:bg-green-600 transition-all duration-300 shadow-md"
