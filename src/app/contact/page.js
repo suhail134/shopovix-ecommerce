@@ -52,7 +52,7 @@ export default function Contact() {
       <section className="text-center mb-12">
         <h1 className="text-5xl font-bold   mb-4">Contact Us</h1>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-          Have questions or suggestions? Reach out to us and we'll get back to you as soon as possible.
+          Have questions or suggestions? Reach out to us and we&quot;ll get back to you as soon as possible.
         </p>
       </section>
 

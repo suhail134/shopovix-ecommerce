@@ -14,7 +14,7 @@ export default function PrivacyPolicy() {
         <section className="bg-white text-black rounded-2xl shadow-lg p-8 mb-6">
           <h2 className="text-2xl font-semibold mb-3">Introduction</h2>
           <p className="text-gray-700 leading-relaxed">
-            Shopovix ("we", "our", "us") is committed to protecting your privacy. This policy explains how we collect, use, and protect your personal data.
+            Shopovix (&quot;we&quot;, &quot;our&quot;, &quot;us&quot;) is committed to protecting your privacy. This policy explains how we collect, use, and protect your personal data.
           </p>
         </section>
 

@@ -2,7 +2,6 @@ import Reviews from "@/models/Reviews";
 import connectDB from "@/db/connectDB";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";// Adjust path as needed
 
 export async function GET(req) {
   await connectDB();

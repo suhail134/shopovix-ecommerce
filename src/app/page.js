@@ -316,7 +316,7 @@ export default function Home() {
           {/* Testimonial 1 */}
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <p className="italic text-gray-700 leading-relaxed">
-              "Amazing products and super fast delivery! Shopovix is my go-to store."
+              Amazing products and super fast delivery! Shopovix is my go-to store.
             </p>
             <div className="mt-4 flex items-center justify-center gap-2">
               <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
@@ -327,7 +327,7 @@ export default function Home() {
           {/* Testimonial 2 */}
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <p className="italic text-gray-700 leading-relaxed">
-              "Great quality at the lowest price. Customer support is very helpful!"
+              Great quality at the lowest price. Customer support is very helpful!
             </p>
             <div className="mt-4 flex items-center justify-center gap-2">
               <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
@@ -338,7 +338,7 @@ export default function Home() {
           {/* Testimonial 3 */}
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <p className="italic text-gray-700 leading-relaxed">
-              "Easy returns process and cash on delivery made my shopping stress-free."
+              Easy returns process and cash on delivery made my shopping stress-free.
             </p>
             <div className="mt-4 flex items-center justify-center gap-2">
               <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
@@ -349,7 +349,7 @@ export default function Home() {
           {/* Testimonial 4 */}
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <p className="italic text-gray-700 leading-relaxed">
-              "Loved the packaging and super quick delivery. Highly recommended!"
+              Loved the packaging and super quick delivery. Highly recommended!
             </p>
             <div className="mt-4 flex items-center justify-center gap-2">
               <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
@@ -360,7 +360,7 @@ export default function Home() {
           {/* Testimonial 5 */}
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <p className="italic text-gray-700 leading-relaxed">
-              "Shopovix never disappoints. Best prices, best service!"
+              Shopovix never disappoints. Best prices, best service!
             </p>
             <div className="mt-4 flex items-center justify-center gap-2">
               <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>

@@ -68,7 +68,7 @@ export default function Terms() {
         <section className="bg-white text-black rounded-2xl shadow-lg p-8 mb-6">
           <h3 className="text-xl font-semibold mb-3">7. Changes to Terms</h3>
           <p className="text-gray-700 leading-relaxed">
-            We may modify these Terms &amp; Conditions from time to time. Changes will be posted on this page with a revised "Last updated" date.
+            We may modify these Terms &amp; Conditions from time to time. Changes will be posted on this page with a revised &quot;Last updated&quot; date.
           </p>
         </section>
 
