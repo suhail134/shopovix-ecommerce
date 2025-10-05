@@ -86,7 +86,7 @@ const Navbar = () => {
           <Searchbar />
         </div>
 
-<div className="signup  hidden ">
+<div className="signup   ">
       {/* Admin Panel / Signup*/}
           <Link  href="/signUp" className=" bg-blue-600 text-white  px-4 py-2 rounded-lg hover:bg-blue-700 transition relative bottom-20 sm:right-40 md:right-40 flex gap-1 items-center">
           <button className="cursor-pointer" >SignUp</button>
