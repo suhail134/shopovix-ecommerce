@@ -12,17 +12,12 @@ import { LoaderCircle, User, Mail, HeartPlus, ChevronDown, ChevronUp } from "luc
 import ReactStars from "react-stars";
 import ReviewsDisplay from "@/component/CustomerReviews";
 
-
-// import {  } from "lucide-react";
-
 const Page = ({ params }) => {
   const { category } = params;
   const router = useRouter();
   const { id } = params;
-  const { productID } = params
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
-  const [slidesToShow, setSlidesToShow] = useState(4);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [buyLoading, setBuyLoading] = useState(false);
@@ -57,13 +52,6 @@ const Page = ({ params }) => {
       });
   }, [id]);
 
-  //   const categorySlug = decodeURIComponent(category);
-  //     // Reverse slug to match original category in DB
-  //     const originalCategory = categorySlug.replace(/-/g, ' ').replace(/and/g, '&');
-  // const filtered = products.filter(
-  //         (p) => p?.category?.toLowerCase() === originalCategory.toLowerCase()
-  //     );
-  // Fetch all products for "People Also Viewed"
   useEffect(() => {
     setLoading(true);
     fetch("/api/products")

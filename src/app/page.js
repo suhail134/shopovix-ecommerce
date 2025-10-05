@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Subscriber from "@/component/Subscriber";
 import { useRouter } from "next/navigation";
 import { Loader, LoaderCircle, LoaderPinwheel, RefreshCw, Wallet, Tags, HeartPlus } from "lucide-react";
-
+import Head from "next/head";
 export default function Home() {
   const [collection, setCollection] = useState([])
   const [products, setProducts] = useState([])
@@ -82,7 +82,11 @@ export default function Home() {
   };
 
   return (
-
+    <>
+      <Head>
+        <title>home - Shopovix</title>
+        <meta name="description" content="Best products at the lowest prices. Shop now and experience the difference!" />
+      </Head>
     <main  >
       <div className="bg-gray-300 h-[1px] w-full my-2"></div>
       <section className="hero-section relative h-[24vh] sm:h-[60vh] md:h-[70vh] lg:h-[100vh] w-full overflow-hidden flex items-end justify-center">
@@ -374,5 +378,8 @@ export default function Home() {
         <Subscriber />
       </section>
     </main>
+    </>
   );
 }
+
+

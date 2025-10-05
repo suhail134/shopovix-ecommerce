@@ -176,10 +176,15 @@ export default function MyOrders() {
             <div className="flex items-center gap-4 mb-4">
               <div className="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-xl overflow-hidden border border-gray-200">
                 <img
-                  src={order.products[0]?.image || "/placeholder.png"}
+                  src={
+                    typeof order.products[0]?.product_image === "string"
+                      ? order.products[0].product_image
+                      : order.products[0]?.product_image?.url || "/placeholder.png"
+                  }
                   alt={order.products[0]?.name || "Product"}
                   className="w-full h-full object-cover"
                 />
+
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-800 line-clamp-1">

@@ -25,7 +25,7 @@ const Footer = () => {
             {/* Footer Links */}
             <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 mt-8">
                 {/* Company */}
-                <div className='pl-5' >
+                <div className=' pl-2 md:pl-5' >
                     <h3 className="text-white font-semibold mb-3">Quick Links</h3>
                     <ul className="space-y-2">
                         <li className="hover:text-white hover:underline" ><Link href="/about-Us">About Us</Link></li>

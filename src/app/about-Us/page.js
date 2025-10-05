@@ -1,4 +1,4 @@
-"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -56,7 +56,7 @@ export default function AboutUs() {
         <h2 className="text-3xl font-semibold   mb-8">Meet the Founder</h2>
         <div className="flex flex-col items-center gap-4">
           <div className="relative w-40 h-40 rounded-full overflow-hidden shadow-lg">
-           <Image src={"https://instagram.fdel65-1.fna.fbcdn.net/v/t51.2885-19/527341829_18051540551627466_5466598364211098721_n.jpg?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby44MDAuYzIifQ&_nc_ht=instagram.fdel65-1.fna.fbcdn.net&_nc_cat=106&_nc_oc=Q6cZ2QFs2gGq0YmzVKDsg9cmB_nispmUXee2vsGI5bepmTg1-Oh-cfH-Ql125h49BSqkTmdjLW6uHnY-sGVKt1L9ufzu&_nc_ohc=HSQPFnWSenkQ7kNvwFvA8p3&_nc_gid=ifVnqfj6EqIfvAgA1rBsng&edm=AE-LrgUBAAAA&ccb=7-5&oh=00_AfakMtuTPfglMAW6Qflhm5XEb9xMC5En8DQBaygwCqZ04A&oe=68D1DE4E&_nc_sid=8353fa"} alt="Suhail"  className="object-cover" fill />
+           <Image src={`https://instagram.fdel65-1.fna.fbcdn.net/v/t51.2885-19/527341829_18051540551627466_5466598364211098721_n.jpg?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby44MDAuYzIifQ&_nc_ht=instagram.fdel65-1.fna.fbcdn.net&_nc_cat=106&_nc_oc=Q6cZ2QFs2gGq0YmzVKDsg9cmB_nispmUXee2vsGI5bepmTg1-Oh-cfH-Ql125h49BSqkTmdjLW6uHnY-sGVKt1L9ufzu&_nc_ohc=HSQPFnWSenkQ7kNvwFvA8p3&_nc_gid=ifVnqfj6EqIfvAgA1rBsng&edm=AE-LrgUBAAAA&ccb=7-5&oh=00_AfakMtuTPfglMAW6Qflhm5XEb9xMC5En8DQBaygwCqZ04A&oe=68D1DE4E&_nc_sid=8353fa` || "/founder.jpg"} alt="Suhail"  className="object-cover" fill />
           </div>
           <h3 className="text-xl font-bold  ">Suhail</h3>
           <p className="text-gray-600">
@@ -77,3 +77,9 @@ export default function AboutUs() {
     </main>
   );
 }
+
+
+export const metadata = {
+  title: "about us - Shopovix",
+  description: "Learn more about Shopovix, our mission, and the team behind the brand. We're committed to providing the best shopping experience.",
+};

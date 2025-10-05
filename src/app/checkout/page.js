@@ -32,6 +32,16 @@ const Page = () => {
     const [payLoading, setPayLoading] = useState(false);
     const router = useRouter();
 
+    // helper near top of file
+    const getFirstImageUrl = (p) => {
+        const img = p?.product_image;
+        if (!img) return null;
+        if (Array.isArray(img)) return img[0]?.url ?? null;
+        return img; // agar string hai
+    };
+
+
+
     useEffect(() => {
         if (!productsParam) {
             router.push("/");
@@ -75,98 +85,101 @@ const Page = () => {
         // Optional: handle form submit if needed
     };
 
-  
+
 
     const handleBuyNow = async () => {
-    setPayLoading(true);
+        setPayLoading(true);
 
-    if (!products.length || !products[0].product_price) {
-        alert("Product data not loaded. Try again.");
-        setPayLoading(false);
-        return;
-    }
+        if (!products.length || !products[0].product_price) {
+            alert("Product data not loaded. Try again.");
+            setPayLoading(false);
+            return;
+        }
 
-    // Total amount calculate karna
-    const amount = products.reduce((acc, p) => acc + (p.product_price * p.quantity), 0);
+        // Total amount calculate karna
+        const amount = products.reduce((acc, p) => acc + (p.product_price * p.quantity), 0);
 
-    const res = await fetch("/api/customer", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            amount,
-            ...form,
-            products,
-            totalAmount: amount,
-            paymentMethod: form.paymentMethod,
-            image: Array.isArray(products[0].product_image) ? products[0].product_image[0] : products[0].product_image,
-            customerName: form.firstName,
-            customerAddress: form.fullAddress,
-        })
-    });
+        const res = await fetch("/api/customer", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                amount,
+                ...form,
+                products,
+                totalAmount: amount,
+                paymentMethod: form.paymentMethod,
+                image: getFirstImageUrl(products[0]),
 
-    const data = await res.json();
-    if (!data.success) {
-        setPayLoading(false);
-        alert(data.message || "Order creation failed");
-        return;
-    }
 
-    // Razorpay order ID ko backend se fetch karna
-    const orderID = data.order?.razorpayOrderId || data.order?.id;
+                customerName: form.firstName,
+                customerAddress: form.fullAddress,
+            })
+        });
 
-    // Razorpay options
-    const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
-        amount: amount * 100, // Razorpay ko paisa paise me chahiye
-        currency: "INR",
-        name: "Shopovix",
-        description: "Thanks for your purchase!",
-        image: "https://www.shopovix.store/cdn/shop/files/Screenshot_2025-03-11_000546.png",
-        order_id: orderID,
-        handler: async function (response) {
-            try {
-                const verifyRes = await fetch("/api/verify", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        orderId: orderID,
-                        paymentId: response.razorpay_payment_id,
-                        signature: response.razorpay_signature
-                    })
-                });
 
-                const verifyData = await verifyRes.json();
-                if (verifyData.success) {
-                    localStorage.setItem("orderCompleted", "true");
-                    router.push(`/thank-you?name=${form.firstName}&orderId=${orderID}&total=${amount}&payment=ONLINE&address=${form.fullAddress}`);
-                } else {
+        const data = await res.json();
+        if (!data.success) {
+            setPayLoading(false);
+            alert(data.message || "Order creation failed");
+            return;
+        }
+
+        // Razorpay order ID ko backend se fetch karna
+        const orderID = data.order?.razorpayOrderId || data.order?.id;
+
+        // Razorpay options
+        const options = {
+            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
+            amount: amount * 100, // Razorpay ko paisa paise me chahiye
+            currency: "INR",
+            name: "Shopovix",
+            description: "Thanks for your purchase!",
+            image: "https://www.shopovix.store/cdn/shop/files/Screenshot_2025-03-11_000546.png",
+            order_id: orderID,
+            handler: async function (response) {
+                try {
+                    const verifyRes = await fetch("/api/verify", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            orderId: orderID,
+                            paymentId: response.razorpay_payment_id,
+                            signature: response.razorpay_signature
+                        })
+                    });
+
+                    const verifyData = await verifyRes.json();
+                    if (verifyData.success) {
+                        localStorage.setItem("orderCompleted", "true");
+                        router.push(`/thank-you?name=${form.firstName}&orderId=${orderID}&total=${amount}&payment=ONLINE&address=${form.fullAddress}`);
+                    } else {
+                        setPayLoading(false);
+                        alert("⚠️ Payment verification failed!");
+                    }
+                } catch (err) {
+                    console.error(err);
                     setPayLoading(false);
-                    alert("⚠️ Payment verification failed!");
+                    alert("Something went wrong while verifying payment.");
                 }
-            } catch (err) {
-                console.error(err);
-                setPayLoading(false);
-                alert("Something went wrong while verifying payment.");
-            }
-        },
-        prefill: {
-            name: form.firstName,
-            email: form.email,
-            contact: form.number
-        },
-        theme: { color: "#3399cc" }
-    };
+            },
+            prefill: {
+                name: form.firstName,
+                email: form.email,
+                contact: form.number
+            },
+            theme: { color: "#3399cc" }
+        };
 
-    // Razorpay SDK check
-    if (typeof window !== "undefined" && window.Razorpay) {
-        const rzp1 = new window.Razorpay(options);
-        rzp1.open();
-    } else {
-        console.error("❌ Razorpay SDK not loaded");
-        alert("Payment gateway not loaded. Please refresh and try again.");
-        setPayLoading(false);
-    }
-};
+        // Razorpay SDK check
+        if (typeof window !== "undefined" && window.Razorpay) {
+            const rzp1 = new window.Razorpay(options);
+            rzp1.open();
+        } else {
+            console.error("❌ Razorpay SDK not loaded");
+            alert("Payment gateway not loaded. Please refresh and try again.");
+            setPayLoading(false);
+        }
+    };
 
     const handleCOD = async () => {
         setPayLoading(true);
@@ -180,7 +193,7 @@ const Page = () => {
                     products,
                     totalAmount: amount,
                     razorpayOrderId: "",
-                    image: products[0].product_image,
+                    image: getFirstImageUrl(products[0]),
                     customerName: form.firstName,
                     customerAddress: form.fullAddress,
                     paymentMethod: form.paymentMethod,
@@ -200,9 +213,9 @@ const Page = () => {
                 localStorage.setItem("orderCompleted", "true");
                 setPayLoading(false);
                 setTimeout(() => {
-                   
-                        router.push(`/thank-you?name=${form.firstName}&orderId=${data.order._id}&total=${amount}&payment=${paymentMethod.method}&address=${form.fullAddress}`);
-                    
+
+                    router.push(`/thank-you?name=${form.firstName}&orderId=${data.order._id}&total=${amount}&payment=${paymentMethod.method}&address=${form.fullAddress}`);
+
                     // Optional: clear cart if needed
                 }, 500);
             } else {
@@ -397,7 +410,9 @@ const Page = () => {
                         <h1 className="text-2xl font-bold mb-4 text-gray-800">Order Summary</h1>
                         {products.map((product, idx) => (
                             <div key={product._id || idx} className="flex gap-4 mb-4">
-                                <img src={product.product_image[0]} alt={product.product_title} className="w-20 h-20 rounded-xl object-cover" />
+                                {/* <img src={product.product_image[0]?.url} alt={product.product_title} className="w-20 h-20 rounded-xl object-cover" /> */}
+                                <img src={getFirstImageUrl(product)} alt={product.product_title} className="w-20 h-20 rounded-xl object-cover" />
+
                                 <div>
                                     <h2 className="text-lg font-semibold">{product.product_title}</h2>
                                     <p className="text-gray-700 font-bold">₹{product.product_price} x {product.quantity}</p>

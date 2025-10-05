@@ -90,7 +90,7 @@ export default function Wishlist() {
                   <div className="relative w-full aspect-square overflow-hidden">
                     <img
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      src={product.product_image[0]}
+                      src={product.product_image[0]?.url}
                       alt={product.product_title}
                     />
                     {product.comparision_price && (

@@ -50,10 +50,14 @@ export async function POST(req) {
         customerAddress,
         products: products.map(p => ({
           ...p,
-          product_image: Array.isArray(p.product_image) ? p.product_image[0] : p.product_image
+          product_image: Array.isArray(p.product_image)
+            ? (p.product_image[0]?.url || p.product_image[0])   // sirf url
+            : (p.product_image?.url || p.product_image)
         })),
         totalAmount,
-        image: Array.isArray(products[0].product_image) ? products[0].product_image[0] : products[0].product_image,
+        image: Array.isArray(products[0].product_image)
+          ? (products[0].product_image[0]?.url || products[0].product_image[0])
+          : (products[0].product_image?.url || products[0].product_image),
         customerName,
         razorpayOrderId: null,
         paymentMethod,
@@ -62,32 +66,32 @@ export async function POST(req) {
       });
 
 
-     
-// sirf COD ya paid ke liye auto status update
-if(order.paymentMethod === "COD"){
- setTimeout(async () => {
-  try {
-    const nextStatuses = ["shipped", "out for delivery", "delivered"];
-    let delay = 30000; // 30s delay
-    for (let i = 0; i < nextStatuses.length; i++) {
-      await new Promise((resolve) => setTimeout(resolve, delay));
-      
-      // agar last status "delivered" hai to paymentStatus bhi update karo
-      const updateData = { orderStatus: nextStatuses[i] };
-      if (nextStatuses[i] === "delivered") {
-        updateData.paymentStatus = "paid";
+
+      // sirf COD ya paid ke liye auto status update
+      if (order.paymentMethod === "COD") {
+        setTimeout(async () => {
+          try {
+            const nextStatuses = ["shipped", "out for delivery", "delivered"];
+            let delay = 30000; // 30s delay
+            for (let i = 0; i < nextStatuses.length; i++) {
+              await new Promise((resolve) => setTimeout(resolve, delay));
+
+              // agar last status "delivered" hai to paymentStatus bhi update karo
+              const updateData = { orderStatus: nextStatuses[i] };
+              if (nextStatuses[i] === "delivered") {
+                updateData.paymentStatus = "paid";
+              }
+
+              await Order.findByIdAndUpdate(order._id, updateData);
+
+            }
+          } catch (err) {
+            console.error("Auto status update failed:", err.message);
+          }
+        }, 1000);
+
       }
 
-      await Order.findByIdAndUpdate(order._id, updateData);
-      
-    }
-  } catch (err) {
-    console.error("Auto status update failed:", err.message);
-  }
-}, 1000);
-
-}
- 
       return NextResponse.json({
         success: true,
         error: false,
@@ -145,13 +149,16 @@ if(order.paymentMethod === "COD"){
       const order = await Order.create({
         customer: customer._id,
         email,
-        customerAddress,
-        products:products.map(p => ({
+        products: products.map(p => ({
           ...p,
-          product_image: Array.isArray(p.product_image) ? p.product_image[0] : p.product_image
+          product_image: Array.isArray(p.product_image)
+            ? (p.product_image[0]?.url || p.product_image[0])   // sirf url
+            : (p.product_image?.url || p.product_image)
         })),
         totalAmount,
-        image: Array.isArray(products[0].product_image) ? products[0].product_image[0] : products[0].product_image,
+        image: Array.isArray(products[0].product_image)
+          ? (products[0].product_image[0]?.url || products[0].product_image[0])
+          : (products[0].product_image?.url || products[0].product_image),
         customerName,
         razorpayOrderId: razorpayOrder.id,
         paymentStatus: "pending",
@@ -159,41 +166,24 @@ if(order.paymentMethod === "COD"){
         paymentMethod,
       });
 
-      // const order = await Order.create({
-      //   customer: customer._id,
-      //   email,
-      //   customerAddress,
-      //   products: products.map(p => ({
-      //     ...p,
-      //     product_image: Array.isArray(p.product_image) ? p.product_image[0] : p.product_image
-      //   })),
-      //   totalAmount,
-      //   image: Array.isArray(products[0].product_image) ? products[0].product_image[0] : products[0].product_image,
-      //   customerName,
-      //   razorpayOrderId: razorpayOrder.id,
-      //   paymentMethod,
-      //   paymentStatus: "pending",
-      //   orderStatus: "processing"
-      // });
+      // sirf COD ya paid ke liye auto status update
+      if (order.paymentStatus === "paid") {
+        setTimeout(async () => {
+          try {
+            const nextStatuses = ["shipped", "out for delivery", "delivered"];
+            let delay = 30000; // 30s delay for demo
+            for (let i = 0; i < nextStatuses.length; i++) {
+              await new Promise((resolve) => setTimeout(resolve, delay));
+              await Order.findByIdAndUpdate(order._id, {
+                orderStatus: nextStatuses[i],
+              });
 
-    // sirf COD ya paid ke liye auto status update
-if(order.paymentStatus === "paid"){
-  setTimeout(async () => {
-    try {
-      const nextStatuses = ["shipped", "out for delivery", "delivered"];
-      let delay = 30000; // 30s delay for demo
-      for (let i = 0; i < nextStatuses.length; i++) {
-        await new Promise((resolve) => setTimeout(resolve, delay));
-        await Order.findByIdAndUpdate(order._id, {
-          orderStatus: nextStatuses[i],
-        });
-
+            }
+          } catch (err) {
+            console.error("Auto status update failed:", err.message);
+          }
+        }, 1000);
       }
-    } catch (err) {
-      console.error("Auto status update failed:", err.message);
-    }
-  }, 1000);
-}
 
 
       return NextResponse.json({

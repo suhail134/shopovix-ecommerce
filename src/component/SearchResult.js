@@ -72,7 +72,7 @@ const SearchResult = () => {
                 {/* Product Image */}
                 <div className="relative overflow-hidden aspect-square rounded-lg">
                   <img
-                    src={product.product_image[0]}
+                    src={product.product_image[0]?.url}
                     alt={product.product_title}
                     className="w-full h-full object-cover rounded-lg transform transition-transform duration-500 group-hover:scale-105"
                   />

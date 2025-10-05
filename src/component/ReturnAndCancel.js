@@ -27,8 +27,8 @@ export default function ReturnAndCancel() {
             s === "accepted return request" ||
             s === "accepted" ||
             s === "out for pickup" ||
-            s === "return picked up" 
-            
+            s === "return picked up"
+
           );
         }); // <- yahi galti thi, extra bracket hata de
 
@@ -117,8 +117,8 @@ export default function ReturnAndCancel() {
               status === "accepted return request" ||
               status === "accepted" ||
               status === "out for pickup" ||
-              status === "return picked up" 
-             
+              status === "return picked up"
+
             );
           })
           .map((order) => (
@@ -144,12 +144,12 @@ export default function ReturnAndCancel() {
                 </div>
                 <span
                   className={`px-3 py-1 text-xs rounded-full font-semibold shadow-sm ${order.orderStatus === "cancelled"
-                      ? "bg-red-100 text-red-700"
-                      : order.orderStatus === "return requested"
-                        ? "bg-yellow-100 text-yellow-700"
-                        : order.orderStatus === "accepted return request"
-                          ? "bg-green-100 text-green-700"
-                          : "bg-gray-100 text-gray-600"
+                    ? "bg-red-100 text-red-700"
+                    : order.orderStatus === "return requested"
+                      ? "bg-yellow-100 text-yellow-700"
+                      : order.orderStatus === "accepted return request"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-gray-100 text-gray-600"
                     }`}
                 >
                   {order.orderStatus}
@@ -160,10 +160,15 @@ export default function ReturnAndCancel() {
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm">
                   <img
-                    src={order.products[0]?.image || "/placeholder.png"}
+                    src={
+                      typeof order.products[0]?.product_image === "string"
+                        ? order.products[0].product_image
+                        : order.products[0]?.product_image?.url || "/placeholder.png"
+                    }
                     alt={order.products[0]?.name || "Product"}
                     className="w-full h-full object-cover"
                   />
+
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-800 dark:text-gray-200 line-clamp-1">

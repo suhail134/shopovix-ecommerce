@@ -97,21 +97,21 @@ export default function OrderDetail() {
           >
             <div className="flex items-center gap-5">
               <img
-                src={product.image}
+                src={product.product_image || "/placeholder.png"}
                 alt={product.title}
                 className="w-20 h-20 object-cover rounded-lg border border-gray-200 dark:border-gray-700"
               />
               <div>
                 <p className="font-medium text-gray-800 dark:text-gray-100">
-                  {product.title}
+                  {product.product_title}
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Qty: {product.quantity} × ₹{product.price}
+                  Qty: {product.quantity} × ₹{product.product_price}
                 </p>
               </div>
             </div>
             <p className="font-bold text-lg text-gray-800 dark:text-gray-100">
-              ₹{product.quantity * product.price}
+              ₹{product.quantity * product.product_price}
             </p>
           </div>
         ))}
