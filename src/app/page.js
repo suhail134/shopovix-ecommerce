@@ -155,13 +155,14 @@ export default function Home() {
           Find the perfect products across all categories, curated just for you
         </p>
       </div>
-      <section className="collections grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 px-4 md:px-8">
+      <section >
         {loading ? (
-          <p className="flex justify-center relative lg:left-126  items-center w-full">
-            <LoaderCircle className="text-cyan-800  animate-spin w-16 h-16" />
-          </p>
+        <div className="w-full  flex justify-center items-center">
+    <LoaderCircle className="text-cyan-800 animate-spin w-18 h-18" />
+  </div>
+
         ) : (
-          <>
+          <div  className="collections grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 px-4 md:px-8" >
             {collection.length > 0 ? (
               collection.slice(0, 6).map((col) => (
                 <div
@@ -186,7 +187,7 @@ export default function Home() {
                 No Collections Found
               </div>
             )}
-          </>
+          </div>
         )}
       </section>
 
@@ -200,16 +201,16 @@ export default function Home() {
             Discover the hottest products that everyone is talking about!
           </p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-2 sm:gap-6 px-1  md:px-8"  >
+        <div   >
 
           {/* //30 trending products */}
 
           {loading ? (
-            <p className="flex justify-center relative left-120 items-center">
+            <p className="flex justify-center  items-center">
               <LoaderPinwheel className="text-cyan-400 animate-spin w-20 h-20" />
             </p>
           ) : (
-            <>
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-2 sm:gap-6 px-1  md:px-8" >
               {products.length > 0 ? (
                 products.slice(0, 30).map((product) => {
                   const discount =
@@ -302,7 +303,7 @@ export default function Home() {
                   No Products Found
                 </div>
               )}
-            </>
+            </div>
           )}
 
         </div>
