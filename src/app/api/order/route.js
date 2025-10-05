@@ -8,7 +8,7 @@ export async function GET(req) {
 
   try {
  
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession();
     
 
     if (!session || !session.user?.email) {

@@ -171,7 +171,7 @@ const Navbar = () => {
 
           <li className="relative group">
             <Link
-              href="/product"
+              href="/shop"
               className="text-gray-800 font-medium transition-all duration-300 group-hover:text-red-700"
             >
               Shop

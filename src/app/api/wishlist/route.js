@@ -8,7 +8,7 @@ import { getServerSession } from "next-auth";
 export async function POST(req) {
   try {
     await connectDB();
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession();
 
     if (!session) {
       return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
@@ -59,7 +59,7 @@ export async function GET(req) {
   await connectDB();
 
   try {
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession();
     if (!session || !session.user?.email) {
       return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
     }
@@ -84,7 +84,7 @@ export async function GET(req) {
 export async function DELETE(req) {
   try {
     await connectDB();
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession();
 
     if (!session || !session.user?.email) {
       return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });

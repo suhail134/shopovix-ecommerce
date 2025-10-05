@@ -76,12 +76,10 @@ const Page = ({ params }) => {
 
 
 
+const images = Array.isArray(product?.product_image)
+  ? product.product_image.map(img => img.url)
+  : [];
 
-  const images = product.product_image
-    ? Array.isArray(product.product_image)
-      ? product.product_image
-      : [product.product_image]
-    : [];
 
   const handleBuyNow = () => {
     setBuyLoading(true); // ✅ loader start
@@ -220,7 +218,7 @@ const Page = ({ params }) => {
 
 
         {/* Product Details */}
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col">
           <h1 className="text-3xl font-bold mb-3">{product.product_title}</h1>
 
           <div className="flex items-baseline gap-3 mb-4">
@@ -405,7 +403,7 @@ const Page = ({ params }) => {
             <div className="relative w-full aspect-square overflow-hidden">
               <img
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                src={product.product_image[1] || product.product_image[0]}
+                src={product.product_image[0]?.url || product.product_image[1]?.url || "/placeholder.png"}
                 alt={product.product_title}
               />
 

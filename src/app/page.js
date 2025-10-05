@@ -223,7 +223,7 @@ export default function Home() {
                   return (
                     <Link href={`/singleProduct/${product._id}`} key={product._id}>
                       <div className="group relative  l px-0 shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden bg-slate-100 cursor-pointer">
-                        <div className="wishlist absolute top-1 right-1  sm:top-3 sm:p-4 sm:right-3 z-50">
+                        <div className="wishlist absolute top-1 right-1  sm:top-3 sm:p-4 sm:right-3 z-20">
                           <button
                             onClick={(e) => {
                               e.preventDefault(); // Link navigation rokne ke liye
@@ -245,7 +245,7 @@ export default function Home() {
                         <div className="relative w-full aspect-square overflow-hidden">
                           <img
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            src={product.product_image[1] || product.product_image[0]}
+                            src={product.product_image[0]?.url || product.product_image[1]?.url || "/placeholder.png"}
                             alt={product.product_title}
                           />
                           {/* Premium Badge */}

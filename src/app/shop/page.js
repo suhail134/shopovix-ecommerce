@@ -112,7 +112,7 @@ const Page = () => {
                   <div className="relative w-full aspect-square overflow-hidden">
                     <img
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      src={product.product_image[1] || product.product_image[0]}
+                      src={product.product_image[0]?.url || product.product_image[1]?.url || "/placeholder.png"}
                       alt={product.product_title}
                     />
                     {/* Premium Badge */}

@@ -15,7 +15,7 @@ const MobileNavSlider = ({ navSidebar, setNavSidebar }) => {
     { href: "/", label: "Home", icon: <Home size={20} /> },
     { href: "/about-Us", label: "About Us", icon: <InfoIcon size={20} /> },
     { href: "/contact", label: "Contact Us", icon: <Contact size={20} /> },
-    { href: "/product", label: "Shop", icon: <ShoppingCartIcon size={20} /> },
+    { href: "/shop", label: "Shop", icon: <ShoppingCartIcon size={20} /> },
     { href: "/collection", label: "Collections", icon: <Layers size={20} /> },
     { href: "/faqs", label: "FAQs", icon: <ShieldQuestion size={20} /> },
     { href: "/user", label: "My Account", icon: <User size={20} /> },

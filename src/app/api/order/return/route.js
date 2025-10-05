@@ -6,7 +6,7 @@ import { getServerSession } from "next-auth";
 export async function POST(req) {
   try {
     await connectDB();
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession();
 
     if (!session) {
       return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
