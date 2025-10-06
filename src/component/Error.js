@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-const Error = ({ error, onClose }) => {
+const error = ({ error, onClose }) => {
   const [timeLeft, setTimeLeft] = useState(3);
   const [show, setShow] = useState(false);
 
@@ -54,4 +54,4 @@ const Error = ({ error, onClose }) => {
   );
 };
 
-export default Error;
+export default error;
