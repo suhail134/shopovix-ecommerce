@@ -39,7 +39,7 @@ const Error = ({ error, onClose }) => {
           show ? "opacity-100 scale-100" : "opacity-0 scale-90"
         }`}
       >
-        <p className="text-red-600 font-bold text-lg mb-4">{error?.message}</p>
+        <p className="text-red-600 font-bold text-lg mb-4">{error}</p>
         <button
           onClick={handleClose}
           className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition transform hover:scale-105"
