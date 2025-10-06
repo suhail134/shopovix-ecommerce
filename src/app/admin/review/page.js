@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReactStars from "react-stars";
 import { Delete, LoaderCircle } from "lucide-react";
-import Error from "@/component/error";
+import error from "@/component/Error";
 import Message from "@/component/Message";
 
 const ReviewsPage = () => {
