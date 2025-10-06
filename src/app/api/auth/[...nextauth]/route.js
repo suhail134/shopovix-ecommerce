@@ -24,11 +24,11 @@ const handler = NextAuth({
           const usernameFromEmail = user.email.split("@")[0]; // example: "suhail123"
 
           const NewUser = await User.create({
-            name: profile.name, // "Suhail Khan"
-            username: usernameFromEmail, // generate custom username
+            name: profile.name,
+            username: usernameFromEmail, 
             email: user.email,
-            profilePicture: profile.picture, // google profile pic
-            // coverPicture: "https://default-cover.jpg", // default placeholder
+            profilePicture: profile.picture, 
+         
           });
         }
         return true;

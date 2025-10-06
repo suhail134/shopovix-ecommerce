@@ -181,16 +181,16 @@ export default function MyOrders() {
                       ? order.products[0].product_image
                       : order.products[0]?.product_image?.url || "/placeholder.png"
                   }
-                  alt={order.products[0]?.name || "Product"}
+                  alt={order.products[0]?.product_title || "Product"}
                   className="w-full h-full object-cover"
                 />
 
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-800 line-clamp-1">
-                  {order.products[0]?.name || "Product Name"}
+                  {order.products[0]?.product_title || "Product Name"}
                 </p>
-                <p className="text-xs text-gray-500">+ more items</p>
+                <p className="text-xs text-gray-500">+1 more items</p>
               </div>
             </div>
 
@@ -257,7 +257,7 @@ export default function MyOrders() {
               {order.orderStatus === "return requested" && (
                 <button
                   onClick={() => handleReturn(order._id, "cancel")}
-                  className="bg-yellow-600 w-full text-white px-4 py-2 rounded hover:bg-yellow-700"
+                  className="bg-yellow-600 cursor-pointer w-full text-white px-4 py-2 rounded hover:bg-yellow-700"
                 >
                   Cancel Return
                 </button>
@@ -272,7 +272,7 @@ export default function MyOrders() {
                   </p>
                   <button
                     onClick={() => handleCancel(order._id)}
-                    className="bg-red-600 w-full text-white px-4 py-2 rounded hover:bg-red-700"
+                    className="bg-red-600 cursor-pointer w-full text-white px-4 py-2 rounded hover:bg-red-700"
                   >
                     Confirm Cancel
                   </button>
@@ -280,7 +280,7 @@ export default function MyOrders() {
               ) : order.orderStatus === "processing" ? (
                 <button
                   onClick={() => setActiveAction({ [order._id]: "cancel" })}
-                  className="bg-red-600 w-full text-white px-4 py-2 rounded hover:bg-red-700"
+                  className="bg-red-600 cursor-pointer w-full text-white px-4 py-2 rounded hover:bg-red-700"
                 >
                   Cancel
                 </button>

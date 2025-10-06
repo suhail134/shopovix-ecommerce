@@ -1,5 +1,3 @@
-// app/privacy/page.jsx  (or pages/privacy.js)
-"use client";
 import React from "react";
 
 export default function PrivacyPolicy() {
@@ -68,3 +66,8 @@ export default function PrivacyPolicy() {
     </main>
   );
 }
+
+export const metadata = {
+  title: "Shopovix - Privacy Policy",
+  description: "Learn how Shopovix protects your personal information and ensures your data privacy while shopping online."
+};

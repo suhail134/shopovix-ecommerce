@@ -4,11 +4,12 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { HeartPlus } from "lucide-react";
 import { useRouter } from "next/navigation";
-
+import Error from "./error";
 export default function Wishlist() {
   const [wishlist, setWishlist] = useState([]);
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null)
   const router = useRouter();
 
   useEffect(() => {
@@ -45,10 +46,13 @@ export default function Wishlist() {
               : [...prev, product]
           );
         } else {
-          alert(result.message || "Something went wrong");
+          setError(result.message || "Server Error Please Try Again")
         }
       })
-      .catch(() => alert("Please login to add to wishlist"));
+      .catch((error) =>{
+          console.error(error)
+          setError(error.message || "Internal Error Please Try Again Later" )
+      });
   };
 
 
@@ -63,6 +67,7 @@ export default function Wishlist() {
 
   return (
     <div className="max-w-6xl mx-auto p-4 sm:p-6">
+      {error && <Error error={error} onClose={()=>setError(null)} />}
       <h2 className="text-3xl font-bold mb-6 text-gray-900">Your Wishlist</h2>
       {wishlist.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">

@@ -53,11 +53,9 @@ const UserPage = () => {
 
   return (
     <section className="flex flex-col md:flex-row min-h-screen bg-gray-100">
-      {/* Left Sidebar */}
       <div className="w-full md:w-[25%] bg-white shadow-lg flex flex-col p-4">
         <h2 className="font-bold text-xl text-gray-800 border-b pb-2">My Profile</h2>
 
-        {/* Profile Card */}
         <div className="flex items-center gap-3 mt-4 p-3 bg-gray-50 rounded-xl shadow-sm">
           <img
             className="w-14 h-14 rounded-full hover:scale-105 shadow-md cursor-pointer transition"
@@ -70,7 +68,6 @@ const UserPage = () => {
           </div>
         </div>
 
-        {/* Menu Buttons */}
         <div className="flex flex-col md:gap-2 mt-6  space-y-2 md:space-y-0">
           <button
             onClick={() => setActiveTab("account")}
@@ -135,7 +132,6 @@ const UserPage = () => {
         </div>
       </div>
 
-      {/* Right Column */}
       <div className="w-full md:w-[75%] p-4 md:p-6">
         <div className="bg-white h-full rounded-xl shadow-md p-4">
           {renderContent()}

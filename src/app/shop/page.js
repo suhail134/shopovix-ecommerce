@@ -4,14 +4,16 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Loader, HeartPlus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import Error from '@/component/error';
 const Page = () => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [wishlist, setWishlist] = useState([]);
+  const [error, setError] = useState(null)
   const router = useRouter()
-  // Fetch products from API
+
   useEffect(() => {
-    fetch("/api/products") // ✅ API se products la rahe
+    fetch("/api/products") 
       .then(res => res.json())
       .then(data => {
         setProducts(data.products)
@@ -57,7 +59,7 @@ const Page = () => {
           );
           alert(isInWishlist ? "Removed from wishlist" : "Added to wishlist");
         } else {
-          alert(result.message || "Something went wrong");
+         setError(result.message || "Server Error Please try again later")
         }
       })
       .catch((error) => {
@@ -69,13 +71,13 @@ const Page = () => {
 
   return (
     <div className="min-h-screen py-10 px-1 sm:px-5 bg-gray-50">
+     {error && <Error error={error} onClose={()=>setError(null)} />  } 
       {loading ? (
         <div className="flex justify-center items-center h-96">
           <Loader className="animate-spin w-12 h-12 text-blue-500" />
         </div>
       ) : (
         <>
-          {/* Heading Section */}
           <div className="text-center mb-10">
             <h1 className="text-4xl font-extrabold text-gray-900 mb-2">Product Gallery</h1>
             <p className="text-gray-600 mb-2">
@@ -86,7 +88,6 @@ const Page = () => {
             </p>
           </div>
 
-          {/* Products Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-8  gap-x-1 gap-y-2 sm:px-10">
             {products.map(product => (
               <Link href={`/singleProduct/${product._id}`} key={product._id}>
@@ -108,7 +109,6 @@ const Page = () => {
                   </div>
 
 
-                  {/* Image Section */}
                   <div className="relative w-full aspect-square overflow-hidden">
                     <img
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -123,7 +123,6 @@ const Page = () => {
                     )}
                   </div>
 
-                  {/* Product Details */}
                   <div className="p-4 flex flex-col gap-2">
                     <h2 className="font-semibold text-lg text-gray-900 truncate group-hover:text-blue-600">
                       {product.product_title}
@@ -140,7 +139,6 @@ const Page = () => {
                       )}
                     </div>
 
-                    {/* Button */}
                     <div>
                       <div onClick={() => router.push(`/singleProduct/${product._id}`)} >
                         <button className="mt-3 w-full cursor-pointer bg-blue-600 text-white py-2 rounded-xl text-sm font-medium hover:bg-blue-700 transition duration-300">

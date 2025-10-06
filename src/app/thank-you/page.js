@@ -1,7 +1,5 @@
 "use client"
-// export const dynamic = "force-dynamic";
-// export const fetchCache = "force-no-store";
-// export const revalidate = 0;
+
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle, Truck, ArrowRight } from "lucide-react";
@@ -15,11 +13,11 @@ export default function ThankYouPage() {
 
   useEffect(() => {
     const orderId = searchParams.get("orderId");
-    // Agar orderId nahi hai toh home pe redirect karo
+
     if (!orderId) {
       router.push("/");
     } else {
-      // Order complete ho gaya to flag hata do taki repeat refresh pr redirect ho
+    
       localStorage.removeItem("orderCompleted");
     }
   }, [searchParams, router]);
@@ -35,12 +33,9 @@ export default function ThankYouPage() {
         <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
      </div>}>
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-4">
-      {/* Card */}
       <div className="bg-white shadow-xl rounded-2xl p-8 max-w-xl w-full text-center">
-        {/* Success Icon */}
         <CheckCircle className="text-green-500 w-16 h-16 mx-auto mb-4" />
 
-        {/* Title */}
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           Thank You, {name}! 🎉
         </h1>
@@ -48,11 +43,10 @@ export default function ThankYouPage() {
           Your order has been placed successfully. A confirmation email has been sent to you.
         </p>
 
-        {/* Order Summary */}
         <div className="bg-gray-100 rounded-xl p-5 text-left space-y-3 mb-6">
           <div className="flex justify-between">
             <span className="font-semibold text-gray-700">Order ID:</span>
-            <span className="text-gray-900">{orderId}</span>
+            <span className="text-gray-900">{orderId.slice(0,6)}</span>
           </div>
           <div className="flex justify-between">
             <span className="font-semibold text-gray-700">Total Amount:</span>
@@ -68,13 +62,11 @@ export default function ThankYouPage() {
           </div>
         </div>
 
-        {/* Track Order Section */}
         <div className="flex items-center justify-center gap-2 mb-6">
           <Truck className="text-blue-500 w-5 h-5" />
           <span className="text-gray-700">Your order will be delivered within 3-5 business days.</span>
         </div>
 
-        {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
             href="/"
@@ -82,12 +74,7 @@ export default function ThankYouPage() {
           >
             Continue Shopping <ArrowRight className="w-4 h-4" />
           </Link>
-          {/* <Link
-            href={`/TrackOrderP?orderId=${orderId}`}
-            className="border border-gray-300 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium text-gray-700"
-          >
-            Track Your Order
-          </Link> */}
+         
         </div>
       </div>
     </div>

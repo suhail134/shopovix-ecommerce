@@ -1,12 +1,11 @@
 "use client";
-// export const dynamic = "force-dynamic";
-// export const fetchCache = "force-no-store";
-// export const revalidate = 0;
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Suspense } from "react";
 import { LoaderCircle } from "lucide-react";
+import Message from "@/component/Message";
+import Error from "@/component/error";
 const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -16,8 +15,9 @@ const Page = () => {
   const [form, setForm] = useState({ title: "", description: "", category: "" });
   const [images, setImages] = useState([]);
   const [preview, setPreview] = useState(null);
-
-  // ✅ Fetch existing collection for edit mode
+  const [message, setMessage] = useState(null)
+  const [error, setError] = useState(null)
+  //Fetch existing collection for edit mode
   useEffect(() => {
     if (id) {
       fetch(`/api/collection/${id}`)
@@ -61,15 +61,10 @@ const Page = () => {
       .replace(/[^a-z0-9-]/g, ""); // special characters remove
   };
 
-  // form submit
+
   const handleSubmit = async (e) => {
     e.preventDefault();
    setLoading(true);
-    // if (!form.category) {
-    //   alert("Please enter a category");
-    //   setLoading(false);
-    //   return;
-    // }
     if (!id && images.length === 0) {
       alert("Please select an image");
       return;
@@ -94,14 +89,14 @@ const Page = () => {
 
       if (result.success) {
           setLoading(false);
-        alert(`Collection ${id ? "updated" : "created"} successfully!`);
+        setMessage(`Collection ${id ? "updated" : "created"} successfully!`);
         router.push("/admin/collections/Your-collections");
       } else {
-        alert(result.message || "Something went wrong");
+        setError(result.message || "Something went wrong");
       }
     } catch (error) {
       console.error("Error adding/updating collection:", error);
-      alert("Server error. Please try again.");
+      setError("Server error. Please try again.");
     }
   };
 
@@ -109,6 +104,8 @@ const Page = () => {
     <Suspense   fallback={ <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
           <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
         </div>}>
+        {error && <Error error={error} onClose={()=>setError(null)} />}
+        {message && <Message message={message} onClose={()=>setMessage(null)} />}
       {loading && (
         <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
           <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
@@ -118,12 +115,12 @@ const Page = () => {
       <div className="max-w-2xl mx-auto p-8 bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl shadow-xl border border-gray-200">
         <div className="px-4 sm:px-6 lg:px-10 py-6">
 
-          {/* Heading */}
+      
           <h1 className="text-xl  sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-6 text-center">
             {id ? "✏️ Edit Collection" : "✨ Create New Collection"}
           </h1>
 
-          {/* Top Card */}
+       
           <div className="flex flex-col sm:flex-row justify-between items-center mb-8 p-5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl shadow-md gap-4 sm:gap-0">
             <h2 className="text-xl sm:text-2xl font-bold text-white text-center sm:text-left">
               Go To Collections
@@ -139,7 +136,7 @@ const Page = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-          {/* Collection Info */}
+         
           <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col gap-6">
             <div className="flex flex-col relative">
               <label className="absolute -top-3 left-3 text-sm font-medium text-purple-700 bg-white px-2">
@@ -171,7 +168,7 @@ const Page = () => {
             </div>
           </div>
 
-          {/* Category */}
+         
           <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col gap-4">
             <div className="flex flex-col relative">
               <label className="absolute -top-3 left-3 text-sm font-medium text-purple-700 bg-white px-2">
@@ -189,7 +186,7 @@ const Page = () => {
             </div>
           </div>
 
-          {/* Image */}
+          
           <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
             <p className="text-gray-800 mb-3 font-semibold text-lg">Collection Image</p>
             {preview && (
@@ -208,7 +205,7 @@ const Page = () => {
             </label>
           </div>
 
-          {/* Submit Button */}
+          
           <button
             type="submit"
             className="bg-gradient-to-r from-purple-600 to-indigo-600 cursor-pointer text-white text-lg font-semibold px-6 py-3 rounded-xl shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300"

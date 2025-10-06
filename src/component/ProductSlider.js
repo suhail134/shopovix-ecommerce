@@ -3,6 +3,7 @@ import { useState,useEffect } from "react";
 import { HeartPlus } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Error from "./error";
 import React from "react";
 
 
@@ -11,6 +12,7 @@ const ProductSlider = ({ images = [], product }) => {
   const length = images.length;
   const [loading, setLoading] = useState(false)
   const [wishlist, setWishlist] = useState([]);
+  const [error, setError] = useState(null)
 
 useEffect(() => {
     fetch("/api/wishlist")
@@ -51,12 +53,12 @@ useEffect(() => {
           );
           alert(isInWishlist ? "Removed from wishlist" : "Added to wishlist");
         } else {
-          alert(result.message || "Something went wrong");
+          setError(result.message || "Something went wrong");
         }
       })
       .catch((error) => {
-        alert("Please login to add to wishlist");
         console.error(error);
+        setError(error.message || "Server Error Please Try Again ")
       });
   };
 
@@ -75,6 +77,7 @@ useEffect(() => {
 
   return (
 <div className="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg">
+  {error && <Error error={error} onClose={()=>setError(null)}  />}
   {/* Slides container */}
   <div
     className="flex transition-transform duration-700 ease-in-out"

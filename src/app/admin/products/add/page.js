@@ -1,13 +1,13 @@
 "use client"
-// export const dynamic = "force-dynamic";
-// export const fetchCache = "force-no-store";
-// export const revalidate = 0;
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { LoaderCircle } from 'lucide-react'
 import { Suspense } from 'react'
+import Error from '@/component/error'
+import Message from '@/component/Message'
+
 const AddProductPage = () => {
   const [form, setForm] = useState({
     title: '',
@@ -21,6 +21,8 @@ const AddProductPage = () => {
   const [images, setImages] = useState([]);
   const [preview, setPreview] = useState(null);
   const [loading, setloading] = useState(true)
+  const [error, setError] = useState(null)
+  const [message, setMessage] = useState(null)
 const [existingImages, setExistingImages] = useState([]); // DB images
 const [deletedImages, setDeletedImages] = useState([]); // images to delete
 
@@ -107,11 +109,6 @@ const removeNewImage = (index) => {
       });
       formData.append("deletedImages", JSON.stringify(deletedImages));
 
-      // const response = await fetch("/api/products", {
-      //   method: "POST",
-      //   body: formData
-      // });
-
       const response = await fetch(id ? `/api/products/${id}` : "/api/products", {
         method: id ? "PATCH" : "POST",
         body: formData,
@@ -120,14 +117,17 @@ const removeNewImage = (index) => {
 
       if (result.success) {
         setloading(false);
-        alert(`Product ${id ? "updated" : "created"} successfully!`);
+        // alert(`Product ${id ? "updated" : "created"} successfully!`);
         router.push("/admin/products");
+        setMessage(`Product ${id ? "updated" : "created"} successfully!`)
       } else {
-        alert(result.message || "Something went wrong");
+        // alert(result.message || "Something went wrong");
+        setError(result.message || "Something Went Wrong")
       }
     } catch (error) {
       console.error("Error adding/updating Product:", error);
-      alert("Server error. Please try again.");
+      // alert("Server error. Please try again.");
+      setError(error.message || "Server error. Please try again.")
     }
 
 
@@ -145,12 +145,13 @@ const removeNewImage = (index) => {
   return (
     <Suspense fallback={<div className="flex justify-center items-center h-96"><LoaderCircle className="animate-spin w-12 h-12 text-blue-600" />
     </div>}>
+    {error && <Error error={error} onClose={()=>setError(null)} />}
+    {message && <Message message={message} onClose={()=>setMessage(null)} />}
       {loading && (
         <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
           <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
         </div>
       )}
-
       <div className="p-6 max-w-4xl mx-auto min-h-screen z-50 bg-gray-100">
         <style jsx global>{`
         html,

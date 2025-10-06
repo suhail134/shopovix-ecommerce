@@ -1,7 +1,4 @@
 "use client"
-// export const dynamic = "force-dynamic";
-// export const fetchCache = "force-no-store";
-// export const revalidate = 0;
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
@@ -9,6 +6,8 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Loader } from "lucide-react";
 import { Suspense } from 'react'
+import Message from '@/component/Message'
+import Error from '@/component/error'
 
 const Page = () => {
   const [products, setProducts] = useState([])
@@ -17,10 +16,10 @@ const Page = () => {
   const router = useRouter();
   const productId = searchParams.get("id");
   const [search, setSearch] = useState("")
-
+  const [error, setError] = useState(null)
+  const [message, setMessage] = useState(null)
   useEffect(() => {
     if (productId) {
-      // Edit mode → product fetch karo
       fetch(`/api/products/${productId}`)
         .then((res) => res.json())
         .then((data) => setProducts(data.product));
@@ -28,7 +27,7 @@ const Page = () => {
   }, [productId]);
 
   useEffect(() => {
-    fetch("/api/products") // ✅ API se products la rahe
+    fetch("/api/products") 
       .then(res => res.json())
       .then(data => {
         setProducts(data.products)
@@ -43,17 +42,16 @@ const Page = () => {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          alert("Product deleted successfully");
+          setMessage("Product deleted successfully");
           setProducts(products.filter(p => p._id !== id));
         } else {
-          alert(data.message || "Failed to delete product");
+          setError(data.message || "Failed to delete product");
         }
       })
-      .catch(err => alert("Error: " + err.message));
+      .catch(err => setError("Error: " + err.message));
 
   }
   const handleEdit = (id) => {
-    // Add page me product ka id pass kar do
     router.push(`/admin/products/add?id=${id}`);
   };
 
@@ -65,6 +63,8 @@ const Page = () => {
   )
   return (
     <Suspense fallback={<div className="flex justify-center items-center h-96"> <Loader className="animate-spin w-12 h-12 text-blue-500" /> </div>}>
+      {error && <Error error={error} onClose={()=>setError(null)} />}
+      {message && <Message message={message} onClose={()=>setMessage(null)} />}
     <div className="p-6">
 
       {/* HEADER */}

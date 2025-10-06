@@ -4,7 +4,6 @@ import Order from "@/models/Orders";
 import connectDB from "@/db/connectDB";
 import Razorpay from "razorpay";
 import { NextResponse } from "next/server";
-// import payments from "razorpay/dist/types/payments";
 
 export async function POST(req) {
   try {
@@ -29,20 +28,6 @@ export async function POST(req) {
         { email, number, country, firstName, fullAddress, apartment, city, state, pincode },
         { new: true, upsert: true }
       );
-
-      // const order = await Order.create({
-      //   customer: customer._id,
-      //   email,
-      //   customerAddress,
-      //   products,
-      //   totalAmount,
-      //   image,
-      //   customerName,
-      //   razorpayOrderId: null,
-      //   paymentMethod,
-      //   paymentStatus: "pending",
-      //   orderStatus: "processing"
-      // });
 
       const order = await Order.create({
         customer: customer._id,
@@ -72,7 +57,7 @@ export async function POST(req) {
         setTimeout(async () => {
           try {
             const nextStatuses = ["shipped", "out for delivery", "delivered"];
-            let delay = 30000; // 30s delay
+            let delay = 60000; // 30s delay
             for (let i = 0; i < nextStatuses.length; i++) {
               await new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -115,7 +100,7 @@ export async function POST(req) {
       });
 
       let options = {
-        amount: amount * 100, // amount in the smallest currency unit
+        amount: amount * 100, 
         currency: "INR"
       };
 
@@ -152,7 +137,7 @@ export async function POST(req) {
         products: products.map(p => ({
           ...p,
           product_image: Array.isArray(p.product_image)
-            ? (p.product_image[0]?.url || p.product_image[0])   // sirf url
+            ? (p.product_image[0]?.url || p.product_image[0])   // only url
             : (p.product_image?.url || p.product_image)
         })),
         totalAmount,
@@ -166,12 +151,12 @@ export async function POST(req) {
         paymentMethod,
       });
 
-      // sirf COD ya paid ke liye auto status update
+      // auto status update only for  COD or paid  
       if (order.paymentStatus === "paid") {
         setTimeout(async () => {
           try {
             const nextStatuses = ["shipped", "out for delivery", "delivered"];
-            let delay = 30000; // 30s delay for demo
+            let delay = 60000; // 30s delay for demo
             for (let i = 0; i < nextStatuses.length; i++) {
               await new Promise((resolve) => setTimeout(resolve, delay));
               await Order.findByIdAndUpdate(order._id, {

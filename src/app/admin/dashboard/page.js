@@ -50,7 +50,7 @@ const AdminDashboard = () => {
 
     // COD orders count
     const codOrders = orders.filter(order => order.paymentMethod === "COD");
-    // // ONLINE orders count
+    //  ONLINE orders count
     const onlineOrders = orders.filter(order => order.paymentMethod === "ONLINE");
 
 
@@ -104,7 +104,7 @@ const AdminDashboard = () => {
                         </div>
                     </div>
 
-                    {/* Stats Section */}
+                   
                     <div className="mt-2 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 p-6 rounded-2xl shadow-2xl">
                         <h2 className="text-2xl font-bold mb-6 text-blue-300">📊 Store Overview</h2>
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-center">

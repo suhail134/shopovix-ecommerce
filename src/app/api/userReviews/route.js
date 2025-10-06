@@ -12,7 +12,7 @@ export async function GET(req) {
 
     if (!session || !session.user?.email) {
 
-      return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ success: false, message: "Please Sign In First" }, { status: 401 });
     }
 
     const email = session.user.email.toLowerCase();

@@ -51,7 +51,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gray-900">
-      {/* Background for Admin */}
+     
       <div className="absolute inset-0 -z-10">
         <img
           src="/admin-bg.gif"
@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
       </div>
 
       <div className="relative w-full max-w-4xl mx-2 sm:mx-auto bg-gray-800/70 backdrop-blur-xl rounded-2xl shadow-2xl flex overflow-hidden border border-gray-700">
-        {/* Left Side - Branding */}
+     
         <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-800 text-white flex-col justify-center items-center p-10">
           <h1 className="text-4xl font-bold mb-4 tracking-wide">Admin Panel 🔐</h1>
           <p className="max-w-sm text-center opacity-80">
@@ -74,7 +74,7 @@ export default function AdminLoginPage() {
           />
         </div>
 
-        {/* Right Side - Login Form */}
+       
         <div className="w-full md:w-1/2 flex items-center justify-center p-10">
           <div className="w-full max-w-md">
             <h2 className="text-3xl font-bold text-white mb-6">Admin Login</h2>
@@ -109,7 +109,7 @@ export default function AdminLoginPage() {
                   />
                 </div>
                 {errorMsg && (
-                  <div className="text-red-400 text-sm font-medium mb-2">{errorMsg}</div>
+                  <div className="text-red-400 text-center text-sm font-medium mb-2">{errorMsg}</div>
                 )}
                 <button
                   type="submit"

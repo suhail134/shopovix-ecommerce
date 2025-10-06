@@ -11,7 +11,7 @@ export async function POST(req) {
     const session = await getServerSession();
 
     if (!session) {
-      return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ success: false, message: "Please Sign In First" }, { status: 401 });
     }
 
     const email = session.user.email.toLowerCase();
@@ -61,12 +61,12 @@ export async function GET(req) {
   try {
     const session = await getServerSession();
     if (!session || !session.user?.email) {
-      return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ success: false, message: "Please Sign In First" }, { status: 401 });
     }
 
     const email = session.user.email.toLowerCase();
 
-    // ek hi wishlist return karo
+
     const wishlist = await Wishlist.findOne({ email }).populate("products");
 
     if (!wishlist) {
@@ -87,7 +87,7 @@ export async function DELETE(req) {
     const session = await getServerSession();
 
     if (!session || !session.user?.email) {
-      return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ success: false, message: "Please Sign In First" }, { status: 401 });
     }
 
     const { productId } = await req.json();

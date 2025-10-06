@@ -66,7 +66,6 @@ export async function POST(req) {
 export async function GET() {
   try {
     await connectDB();
-    // const product = await Product.findById(params.id);
     const reviews = await Reviews.find().sort({ createdAt: -1 }); // latest first
     return Response.json({ success: true, reviews });
   } catch (error) {

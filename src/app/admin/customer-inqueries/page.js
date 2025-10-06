@@ -32,7 +32,7 @@ const Page = () => {
         Customer Inquiries
       </h1>
 
-      {/* Search Bar */}
+   
       <div className="max-w-md mx-auto mb-10">
         <input
           type="text"
@@ -43,14 +43,14 @@ const Page = () => {
         />
       </div>
 
-      {/* Grid of Inquiries */}
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredInqueries.map((item) => (
           <div
             key={item._id}
             className="bg-white shadow-lg hover:shadow-xl transition rounded-2xl border border-gray-200 p-6"
           >
-            {/* Header */}
+           
             <div className="flex items-center justify-between mb-4">
               <h2 className="flex items-center gap-2 text-lg font-semibold text-gray-700">
                 <User className="w-5 h-5 text-indigo-600" /> {item.name}
@@ -66,18 +66,18 @@ const Page = () => {
               </span>
             </div>
 
-            {/* Email */}
+           
             <p className="flex items-center gap-2 text-gray-600 mb-3">
               <Mail className="w-4 h-4 text-indigo-500" /> {item.email}
             </p>
 
-            {/* Message */}
+           
             <div className="flex items-start gap-2 text-gray-700 mb-3">
               <MessageSquare className="w-4 h-4 text-indigo-500 mt-1" />
               <span>{item.message}</span>
             </div>
 
-            {/* Date */}
+           
             {item.createdAt && (
               <p className="flex items-center gap-2 text-sm text-gray-500">
                 <Calendar className="w-4 h-4 text-indigo-400" />{" "}

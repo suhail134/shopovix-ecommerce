@@ -1,11 +1,11 @@
-"use client";
+
 import React from "react";
 
 export default function PaymentOptions() {
   return (
     <div className="min-h-screen bg-gradient-to-b   px-6 md:px-20 py-12">
       <div className="max-w-4xl mx-auto">
-        {/* Heading */}
+      
         <h1 className="text-4xl font-bold text-center mb-8">
           Payment Options
         </h1>
@@ -16,9 +16,9 @@ export default function PaymentOptions() {
           at checkout.
         </p>
 
-        {/* Payment Methods */}
+    
         <div className="space-y-8">
-          {/* COD */}
+       
           <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
             <h2 className="text-2xl font-semibold mb-3">
               Cash on Delivery (COD)
@@ -33,7 +33,7 @@ export default function PaymentOptions() {
             </p>
           </div>
 
-          {/* UPI / Wallet */}
+       
           <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
             <h2 className="text-2xl font-semibold mb-3">UPI & Wallets</h2>
             <p className="text-gray-400">
@@ -42,7 +42,7 @@ export default function PaymentOptions() {
             </p>
           </div>
 
-          {/* Cards */}
+    
           <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
             <h2 className="text-2xl font-semibold mb-3">
               Credit & Debit Cards
@@ -56,7 +56,7 @@ export default function PaymentOptions() {
             </p>
           </div>
 
-          {/* Net Banking */}
+       
           <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
             <h2 className="text-2xl font-semibold mb-3">Net Banking</h2>
             <p className="text-gray-400">
@@ -65,7 +65,7 @@ export default function PaymentOptions() {
             </p>
           </div>
 
-          {/* Secure Payment */}
+         
           <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
             <h2 className="text-2xl font-semibold mb-3">100% Secure Payments</h2>
             <p className="text-gray-300">
@@ -78,4 +78,9 @@ export default function PaymentOptions() {
       </div>
     </div>
   );
+}
+
+export const metadata = {
+  title: "Shopovix - Payment Page",
+  description: "Secure and hassle-free payment options for your Shopovix orders. Pay via UPI, cards, netbanking, and more."
 }

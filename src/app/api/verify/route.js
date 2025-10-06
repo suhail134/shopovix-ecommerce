@@ -43,7 +43,7 @@ export async function POST(req) {
     setTimeout(async () => {
       try {
         const nextStatuses = ["shipped", "out for delivery", "delivered"];
-        const delay = 10000; // 10s delay har step ke liye
+        const delay = 60000; // 60s delay har step ke liye
 
         for (let status of nextStatuses) {
           await new Promise((resolve) => setTimeout(resolve, delay));

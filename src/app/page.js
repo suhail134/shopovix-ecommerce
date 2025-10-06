@@ -6,11 +6,13 @@ import Subscriber from "@/component/Subscriber";
 import { useRouter } from "next/navigation";
 import { Loader, LoaderCircle, LoaderPinwheel, RefreshCw, Wallet, Tags, HeartPlus } from "lucide-react";
 import Head from "next/head";
+import Error from "@/component/error";
 export default function Home() {
   const [collection, setCollection] = useState([])
   const [products, setProducts] = useState([])
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null);
   const router = useRouter()
 
   useEffect(() => {
@@ -25,7 +27,7 @@ export default function Home() {
 
 
   useEffect(() => {
-    fetch("/api/products") // ✅ API se products la rahe
+    fetch("/api/products") 
       .then(res => res.json())
       .then(data => {
         setProducts(data.products)
@@ -66,27 +68,27 @@ export default function Home() {
         if (result.success) {
           setWishlist((prev) =>
             isInWishlist
-              ? prev.filter((id) => id !== product._id) // remove from wishlist
-              : [...prev, product._id]                 // add to wishlist
+              ? prev.filter((id) => id !== product._id) 
+              : [...prev, product._id]                
           );
-          alert(isInWishlist ? "Removed from wishlist" : "Added to wishlist");
+          // alert(isInWishlist ? "Removed from wishlist" : "Added to wishlist");
         } else {
-          alert(result.message || "Something went wrong");
-        }
+            setError(result.message || "Something went wrong");    }
         
       })
       .catch((error) => {
-        alert("Please login to add to wishlist");
-        // console.error(error);
+  
+        console.error(error);
       });
   };
-
-  return (
-    <>
       <Head>
         <title>home - Shopovix</title>
         <meta name="description" content="Best products at the lowest prices. Shop now and experience the difference!" />
       </Head>
+  return (
+    <>
+              <Error error={error} onClose={() => setError(null)} />
+
     <main  >
       <div className="bg-gray-300 h-[1px] w-full my-2"></div>
       <section className="hero-section relative h-[24vh] sm:h-[60vh] md:h-[70vh] lg:h-[100vh] w-full overflow-hidden flex items-end justify-center">
@@ -108,11 +110,7 @@ export default function Home() {
 
 
 
-      {/* <div className="button absolute lg:top-[80vh] lg:bottom-0 bottom-73 lg:left-25  left-13 transform -translate-x-1/2 -translate-y-1/2 z-10">
-        <button className="bg-white cursor-pointer lg:text-xl text-xs hover:bg-gray-100 text-black font-bold py-2 px-4 rounded-lg mt-10 mb-10  "  >
-          <Link href={'/product'} className="no-underline" >Shop Now</Link>
-        </button>
-      </div> */}
+    
       <section className="py-10 px-4  sm:px-8">
         <div className="details max-w-5xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold text-center mb-8 text-gray-800">
@@ -121,7 +119,7 @@ export default function Home() {
 
           <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-2xl flex  sm:flex-row items-center justify-center sm:justify-between text-center gap-6 sm:gap-8 text-gray-700 transition-transform duration-300 hover:scale-[1.01]">
 
-            {/* 7 Days Easy Returns */}
+        
             <p className="flex flex-col items-center gap-3 max-w-[150px]">
               <span className="bg-gray-100 p-4 rounded-full shadow-sm">
                 <RefreshCw className="text-xs sm:text-lg text-gray-800" />
@@ -129,7 +127,6 @@ export default function Home() {
               <span className="font-medium text-xs sm:text-lg">7 Days Easy Returns</span>
             </p>
 
-            {/* Cash On Delivery */}
             <p className="flex flex-col items-center gap-3 max-w-[150px]">
               <span className="bg-gray-100 p-4 rounded-full shadow-sm">
                 <Wallet className="text-xs sm:text-lg text-gray-800" />
@@ -137,7 +134,7 @@ export default function Home() {
               <span className="font-medium text-xs sm:text-lg">Cash On Delivery</span>
             </p>
 
-            {/* Lowest Price */}
+       
             <p className="flex flex-col items-center gap-3 max-w-[150px]">
               <span className="bg-gray-100 p-4 rounded-full shadow-sm">
                 <Tags className="sm:w-8 sm:h-8 w-4 h-4 text-gray-800" />
@@ -207,8 +204,7 @@ export default function Home() {
         </div>
         <div   >
 
-          {/* //30 trending products */}
-
+         
           {loading ? (
             <p className="flex justify-center  items-center">
               <LoaderPinwheel className="text-cyan-400 animate-spin w-20 h-20" />
@@ -246,7 +242,7 @@ export default function Home() {
 
 
                         </div>
-                        {/* Image Section */}
+                    
                         <div className="relative w-full aspect-square overflow-hidden">
                           <img
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -261,7 +257,7 @@ export default function Home() {
                           )}
                         </div>
 
-                        {/* Product Details */}
+                  
                         <div className="p-4 flex flex-col gap-2">
                           <h2 className="font-semibold text-lg text-gray-900 truncate group-hover:text-blue-600">
                             {product.product_title}
@@ -289,6 +285,7 @@ export default function Home() {
                           </div>
                           <p className="text-green-400 text-sm   relative sm:bottom-2" >Free Delivery</p>
                           {/* Button */}
+                         
                           <div>
                             <button
                               onClick={() => router.push(`/singleProduct/${product._id}`)}
@@ -318,7 +315,7 @@ export default function Home() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Testimonial 1 */}
+         
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <p className="italic text-gray-700 leading-relaxed">
               Amazing products and super fast delivery! Shopovix is my go-to store.
@@ -329,7 +326,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Testimonial 2 */}
+      
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <p className="italic text-gray-700 leading-relaxed">
               Great quality at the lowest price. Customer support is very helpful!
@@ -340,7 +337,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Testimonial 3 */}
+   
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <p className="italic text-gray-700 leading-relaxed">
               Easy returns process and cash on delivery made my shopping stress-free.
@@ -351,7 +348,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Testimonial 4 */}
+      
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <p className="italic text-gray-700 leading-relaxed">
               Loved the packaging and super quick delivery. Highly recommended!
@@ -362,7 +359,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Testimonial 5 */}
+     
           <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <p className="italic text-gray-700 leading-relaxed">
               Shopovix never disappoints. Best prices, best service!

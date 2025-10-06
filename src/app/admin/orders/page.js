@@ -23,7 +23,7 @@ const OrdersPage = () => {
       .catch((err) => console.error("Error fetching orders:", err));
   }, []);
 
-  // ✅ Filter orders based on search input
+  // Filter orders based on search input
   const filteredOrders = orders.filter(
     (item) =>
       item._id.toLowerCase().includes(search.toLowerCase()) ||
@@ -32,7 +32,7 @@ const OrdersPage = () => {
 
   return (
        <div className="p-4 sm:p-8 min-h-screen bg-gray-50 overflow-x-hidden">
-      {/* Prevent unwanted horizontal scroll */}
+      
       <style jsx global>{`
         html,
         body {
@@ -46,12 +46,12 @@ const OrdersPage = () => {
         </div>
       ) : (
         <>
-          {/* Heading */}
+         
           <h1 className="text-2xl sm:text-4xl font-extrabold text-center mb-6 sm:mb-10 text-gray-900 tracking-tight">
             Your Orders
           </h1>
 
-          {/* Search */}
+        
           <div className="max-w-md mx-auto mb-10">
             <input
               type="text"
@@ -62,14 +62,14 @@ const OrdersPage = () => {
             />
           </div>
 
-          {/* No Orders */}
+       
           {orders.length === 0 && (
             <div className="text-center text-gray-500 text-base sm:text-lg bg-white rounded-xl shadow p-6 sm:p-10">
               <p>No orders found.</p>
             </div>
           )}
           
-          {/* Desktop Table */}
+  
           {orders.length > 0 && (
             <div className="hidden sm:block overflow-x-auto">
               <table className="min-w-[900px] w-full bg-white border border-gray-200 rounded-2xl shadow-xl">
@@ -91,7 +91,7 @@ const OrdersPage = () => {
                         key={order._id}
                         className="hover:bg-gray-50 transition cursor-pointer"
                         onClick={() =>
-                          // (router.push(`/admin/singleOrder/${order._id}`))
+                      
                           (window.location.href=`/admin/singleOrder/${order._id}`)
                         }
                       >
@@ -147,7 +147,7 @@ const OrdersPage = () => {
             </div>
           )}
 
-          {/* Mobile Cards */}
+         
           {orders.length > 0 && (
             <div className="grid sm:hidden gap-4">
               {filteredOrders.length > 0 ? (

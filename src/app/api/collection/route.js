@@ -19,7 +19,7 @@ export async function POST(req) {
     let category=formData.get("category");
     const imageFile = formData.get("collection_image"); // ✅ Single image
 
-    // ✅ Validate fields first
+    // Validate fields first
     if (!collection_title || !collection_desc || !imageFile || !category) {
       return new Response(
         JSON.stringify({ success: false, message: "All fields are required" }),
@@ -27,7 +27,7 @@ export async function POST(req) {
       );
     }
 category = encodeURIComponent(category.trim());
-    // ✅ Check for existing collection
+    // Check for existing collection
     const existingCollection = await Collection.findOne({ category });
     if (existingCollection) {
       return new Response(
@@ -39,7 +39,7 @@ category = encodeURIComponent(category.trim());
       );
     }
 
-    // ✅ Upload single image to Cloudinary
+    // Upload single image to Cloudinary
     const buffer = Buffer.from(await imageFile.arrayBuffer());
     const result = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
@@ -52,11 +52,11 @@ category = encodeURIComponent(category.trim());
       stream.end(buffer);
     });
 
-    // ✅ Create new collection with single image URL
+    // Create new collection with single image URL
     const newCollection = await Collection.create({
       collection_title,
       collection_desc,
-      collection_image: result.secure_url, // ✅ single image URL
+      collection_image: result.secure_url, 
       category,
     });
 
@@ -85,10 +85,8 @@ category = encodeURIComponent(category.trim());
 export async function GET() {
   try {
     await connectDB();
-    // const Collection=decodeURIComponent(require('@/models/Collection').default);
     const collection = await Collection.find().sort({ createdAt: -1 });
     // Decode category names before sending response
-    
     const decodedCollections = collection.map((col) => ({
       ...col._doc,
       category: decodeURIComponent(col.category),

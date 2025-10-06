@@ -1,22 +1,22 @@
-"use client";
+
 import React from "react";
 
 export default function ReturnExchangePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b  px-6 md:px-20 py-12">
       <div className="max-w-4xl mx-auto">
-        {/* Heading */}
+       
         <h1 className="text-4xl font-bold text-center mb-8">
           Return & Exchange Policy
         </h1>
 
-        {/* Intro */}
+     
         <p className="text-gray-500 text-center mb-10">
           We value your satisfaction and want you to have the best shopping experience with us.
           Please read our return and exchange policy carefully before making a request.
         </p>
 
-        {/* Policy Sections */}
+       
         <div className="space-y-8">
           {/* Section 1 */}
           <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
@@ -32,7 +32,7 @@ export default function ReturnExchangePage() {
             </ul>
           </div>
 
-          {/* Section 2 */}
+      
           <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
             <h2 className="text-2xl font-semibold mb-3">Non-Returnable Items</h2>
             <p className="text-gray-400">
@@ -45,7 +45,6 @@ export default function ReturnExchangePage() {
             </ul>
           </div>
 
-          {/* Section 3 */}
           <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
             <h2 className="text-2xl font-semibold mb-3">Exchange Process</h2>
             <p className="text-gray-400">
@@ -59,7 +58,7 @@ export default function ReturnExchangePage() {
             </ol>
           </div>
 
-          {/* Section 4 */}
+       
           <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
             <h2 className="text-2xl font-semibold mb-3">Refunds</h2>
             <p className="text-gray-400">
@@ -69,7 +68,7 @@ export default function ReturnExchangePage() {
             </p>
           </div>
 
-          {/* Section 5 */}
+          
           <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition">
             <h2 className="text-2xl font-semibold mb-3">Contact Us</h2>
             <p className="text-gray-300">
@@ -85,3 +84,9 @@ export default function ReturnExchangePage() {
     </div>
   );
 }
+
+
+export const metadata = {
+  title: "Shopovix - Returns & Exchanges",
+  description: "Easily understand Shopovix's return and exchange policy to make your shopping experience worry-free."
+};

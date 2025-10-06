@@ -8,11 +8,9 @@ const SingleOrderPage = ({ params }) => {
 
   useEffect(() => {
     if (!id) return;
-
     fetch(`/api/order/${id}`)
       .then((res) => res.json())
-      .then((data) => {
-     
+      .then((data) => {   
         if (data.success && data.order) {
           setOrder(data.order);
           setLoading(false);
@@ -31,7 +29,7 @@ const SingleOrderPage = ({ params }) => {
           overflow-x: hidden !important;
         }
       `}</style>
-      {/* Page Title */}
+     
       {loading ? (
         <div className="flex justify-center items-center h-96">
           <Loader className="animate-spin w-12 h-12 text-blue-500" />
@@ -41,9 +39,9 @@ const SingleOrderPage = ({ params }) => {
       </h1>
 
         <div className="bg-white p-4 sm:p-8 rounded-2xl shadow-xl space-y-6 sm:space-y-8">
-          {/* Order & Payment Info */}
+         
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Order Info */}
+          
             <div>
               <h2 className="text-lg font-semibold text-gray-900 mb-2">
                 Order Information
@@ -81,7 +79,7 @@ const SingleOrderPage = ({ params }) => {
               </div>
             </div>
 
-            {/* Payment Info */}
+          
             <div>
               <h2 className="text-lg font-semibold text-gray-900 mb-2">
                 Payment & Shipping
@@ -99,7 +97,7 @@ const SingleOrderPage = ({ params }) => {
               </p>
               <p className="text-gray-700 text-sm sm:text-base">
                 <strong>Payment Method:</strong>{order.paymentMethod}
-                {/* {order.paymentMethod || "COD"} */}
+              
 
               </p>
               <p className="text-gray-700 text-sm sm:text-base">
@@ -141,7 +139,7 @@ const SingleOrderPage = ({ params }) => {
 
           </div>
 
-          {/* Customer Info */}
+          
           <div>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">
               Customer Information
@@ -155,12 +153,11 @@ const SingleOrderPage = ({ params }) => {
             <p className="text-gray-700 w-100 break-words text-sm sm:text-base">
               <strong>Customer Full Address:</strong> {order.customerAddress || "N/A"}
             </p>
-            {/* <p className="text-gray-700 text-sm sm:text-base">
-            <strong>Address:</strong> {order.shippingAddress}
-          </p> */}
+           
+        
           </div>
 
-        {/* Products */}
+       
 
 {order.products.map((item, index) => {
  
@@ -191,7 +188,7 @@ const SingleOrderPage = ({ params }) => {
 })}
 
 
-          {/* Total */}
+        
           {order.totalAmount && (
             <div className="border-t pt-4 sm:pt-6 mt-4 sm:mt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
               <p className="text-lg sm:text-xl font-bold text-gray-900">

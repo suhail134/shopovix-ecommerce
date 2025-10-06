@@ -1,4 +1,4 @@
-"use client";
+
 import React from "react";
 
 export default function ShippingInformation() {
@@ -89,3 +89,8 @@ export default function ShippingInformation() {
     </div>
   );
 }
+
+export const metadata = {
+  title: "Shopovix - Shipping Information",
+  description: "Get detailed information on shipping options, delivery times, and tracking your Shopovix orders."
+};

@@ -37,7 +37,7 @@ export default function OrderDetail() {
   return (
  <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-10 px-4">
   <div className="max-w-4xl mx-auto p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700">
-    {/* Header */}
+    
     <div className="flex flex-wrap justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-5 mb-8">
       <div>
         <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
@@ -66,7 +66,7 @@ export default function OrderDetail() {
       </span>
     </div>
 
-    {/* Customer Info */}
+    
     <div className="mb-10">
       <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100">
         Customer Information
@@ -84,7 +84,7 @@ export default function OrderDetail() {
       </div>
     </div>
 
-    {/* Products */}
+   
     <div className="mb-10">
       <h3 className="text-xl font-semibold mb-5 text-gray-800 dark:text-gray-100">
         Products
@@ -118,7 +118,7 @@ export default function OrderDetail() {
       </div>
     </div>
 
-    {/* Payment Info */}
+ 
     <div className="mb-10 grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm bg-gray-50 dark:bg-gray-800 p-5 rounded-xl border border-gray-200 dark:border-gray-700">
       <p>
         <span className="font-medium">Payment Method:</span>{" "}
@@ -140,7 +140,7 @@ export default function OrderDetail() {
       </p>
     </div>
 
-    {/* Footer / Invoice */}
+    
     <div className="border-t border-gray-200 dark:border-gray-700 pt-6 text-center">
       <p className="text-sm text-gray-500 dark:text-gray-400">
         Thank you for shopping with us 🚀
@@ -152,4 +152,3 @@ export default function OrderDetail() {
 
   );
 }
-// Note: Ensure your backend API at /api/order/[id] returns order details in the expected format.

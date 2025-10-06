@@ -4,6 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReactStars from "react-stars";
 import { Delete, LoaderCircle } from "lucide-react";
+import Error from "@/component/error";
+import Message from "@/component/Message";
 
 const ReviewsPage = () => {
   const [reviews, setReviews] = useState([]);
@@ -12,7 +14,8 @@ const ReviewsPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
-
+  const [message, setMessage] = useState(null)
+  const [error, setError] = useState(null)
   useEffect(() => {
     fetch("/api/reviews")
       .then((res) => res.json())
@@ -33,14 +36,14 @@ const ReviewsPage = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          alert("review deleted successfully")
+          setMessage("review deleted successfully")
           setReviews(reviews.filter((p) => p._id !== id))
         } else {
-          alert(data.message || "Failed to delete review");
+          setError(data.message || "Failed to delete review");
         }
       })
       .catch((err) => {
-        alert("Error: " + err.message)
+        setError("Error: " + err.message)
       })
 
 
@@ -66,6 +69,8 @@ const ReviewsPage = () => {
   }
   return (
     <>
+    {error && <Error error={error} onClose={()=>setError(null)} />}
+    {message && <Message message={message} onClose={()=>setMessage(null)} />}
       <div className="max-w-md mx-auto mt-6 mb-10">
         <input
           type="text"

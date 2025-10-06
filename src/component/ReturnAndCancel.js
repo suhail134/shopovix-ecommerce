@@ -175,7 +175,7 @@ export default function ReturnAndCancel() {
                     {order.products[0]?.name || "Product Name"}
                   </p>
                   <p className="text-xs text-gray-500">
-                    +{order.products.length - 1} more items
+                    +1 more items
                   </p>
                 </div>
               </div>

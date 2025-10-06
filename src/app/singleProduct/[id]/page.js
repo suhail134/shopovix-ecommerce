@@ -11,6 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { LoaderCircle, User, Mail, HeartPlus, ChevronDown, ChevronUp } from "lucide-react";
 import ReactStars from "react-stars";
 import ReviewsDisplay from "@/component/CustomerReviews";
+import Error from "@/component/error";
 
 const Page = ({ params }) => {
   const { category } = params;
@@ -27,17 +28,18 @@ const Page = ({ params }) => {
   const [wishlist, setWishlist] = useState([]);
   const { addToCart } = useCart();
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState(null)
   // Fetch single product and related products
   useEffect(() => {
     if (!id) return;
-
+setLoading(true)
     fetch(`/api/products/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
           setProduct(data.product);
 
-          // ✅ Get ALL products and filter by category on frontend
+          //  Get ALL products and filter by category on frontend
           fetch("/api/products")
             .then((res) => res.json())
             .then((rdata) => {
@@ -46,10 +48,14 @@ const Page = ({ params }) => {
                   p.category?.toLowerCase() === data.product.category?.toLowerCase() &&
                   p._id !== data.product._id
               );
+
               setRelatedProducts(filtered);
             });
         }
-      });
+        setLoading(false)
+      })
+      .catch(() => setLoadingProduct(false));
+
   }, [id]);
 
   useEffect(() => {
@@ -70,14 +76,14 @@ const images = Array.isArray(product?.product_image)
 
 
   const handleBuyNow = () => {
-    setBuyLoading(true); // ✅ loader start
+    setBuyLoading(true); 
     setTimeout(() => {
       router.push(`/checkout?products=${product._id}`);
-    }, 500); // ✅ thoda delay add kiya smooth feel ke liye
+    }, 500); 
   };
 
   const handlereview = () => {
-    setBuyLoading(true); // ✅ loader start
+    setBuyLoading(true);
     setTimeout(() => {
       router.push(`/create-review?products=${product._id}`);
     }, 500);
@@ -94,7 +100,7 @@ const images = Array.isArray(product?.product_image)
         setRevLoading(false)
       })
       .catch((err) => console.error("Error fetching reviews:", err));
-  }, [product._id]); // ✅ dependency me product._id daal do
+  }, [product._id]); 
 
   useEffect(() => {
     fetch("/api/wishlist")
@@ -109,11 +115,11 @@ const images = Array.isArray(product?.product_image)
   }, []);
 
 
-  const handleLike = (product) => { // ✅ product argument add kiya
+  const handleLike = (product) => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    const isInWishlist = wishlist.includes(product._id); // ✅ product argument se _id lo
+    const isInWishlist = wishlist.includes(product._id); 
     const raw = JSON.stringify({
       productId: product._id,
     });
@@ -130,16 +136,15 @@ const images = Array.isArray(product?.product_image)
         if (result.success) {
           setWishlist((prev) =>
             isInWishlist
-              ? prev.filter((id) => id !== product._id) // remove from wishlist
-              : [...prev, product._id]                 // add to wishlist
+              ? prev.filter((id) => id !== product._id)
+              : [...prev, product._id]                
           );
-          alert(isInWishlist ? "Removed from wishlist" : "Added to wishlist");
+         
         } else {
-          alert(result.message || "Something went wrong");
+         setError(result.message || "Server Error Please Try Again")
         }
       })
       .catch((error) => {
-        alert("Please login to add to wishlist");
         console.error(error);
       });
   };
@@ -192,6 +197,7 @@ const images = Array.isArray(product?.product_image)
 
   return (
     <>
+    {error && <Error error={error}  onClose={()=>setError(null)}  />}
       {buyLoading && (
         <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
           <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
@@ -200,12 +206,10 @@ const images = Array.isArray(product?.product_image)
 
 
       <section className="max-w-6xl mx-auto p-6 grid md:grid-cols-2 gap-10 pt-10 pb-20">
-        {/* Product Images */}
         <ProductSlider images={images} product={product} />
 
 
 
-        {/* Product Details */}
         <div className="flex flex-col">
           <h1 className="text-3xl font-bold mb-3">{product.product_title}</h1>
 
@@ -229,7 +233,6 @@ const images = Array.isArray(product?.product_image)
           </div>
           <p className="text-gray-500 relative bottom-2" >Free Delivery</p>
 
-          {/* Rating */}
           <div onClick={() => setOpen(!open)} className="flex items-center cursor-pointer gap-2   sm:gap-3 mb-5 bg-gray-50 dark:bg-gray-800 p-2 md:gap-5 sm:p-4 rounded-xl shadow-md">
 
             <p>{averageRatings}</p>
@@ -274,7 +277,6 @@ const images = Array.isArray(product?.product_image)
 
               <p className="text-gray-500 dark:text-gray-400 text-sm mb-5">{reviews.length} global ratings</p>
 
-              {/* Rating Distribution */}
               <div className="space-y-2 mb-5">
                 {[5, 4, 3, 2, 1].map((star) => {
                   const count = reviews.filter((r) => r.rating === star).length;
@@ -305,7 +307,6 @@ const images = Array.isArray(product?.product_image)
           </div>
 
 
-          {/* Buttons */}
           <div className=" hidden sm:flex flex-col sm:relative sticky bottom-0 sm:flex-row sm:gap-4 mb-6">
             <button
               onClick={() => addToCart(product)}
@@ -321,13 +322,11 @@ const images = Array.isArray(product?.product_image)
             </button>
           </div>
 
-          {/* Description */}
           <div className="bg-gray-100 p-4 rounded-xl mb-4">
             <h3 className="font-semibold text-black text-lg mb-2">Product Description</h3>
             <p className="text-gray-700">{product.product_desc || "No description available."}</p>
           </div>
 
-          {/* Category */}
           <div className="category mt-2 mb-4">
             <span className="inline-block bg-blue-100 text-blue-800 text-xs px-4 py-2 rounded-full">
               Category: {product.category || "Uncategorized"}
@@ -340,7 +339,7 @@ const images = Array.isArray(product?.product_image)
           <div className=" sm:hidden flex   sticky bottom-3 mt-8 gap-2   mb-6">
             <button
               onClick={() => addToCart(product)}
-              className="relative w-full  py-3 rounded-lg border border-green-400 text-black font-medium 
+              className="relative w-full  bg-green-200 py-3 rounded-lg border border-green-700 text-black font-medium 
   hover:bg-green-400 active:bg-green-400 focus:bg-green-400 hover:scale-105 transition transform"
             >
               🛒 Add to Cart
@@ -356,7 +355,6 @@ const images = Array.isArray(product?.product_image)
         </div>
       </section>
 
-      {/* Related Products */}
 <section className="px-1 sm:px-6 lg:px-10 mb-5 mt-10">
   <h2 className="sm:text-2xl text-xl text-gray-800 sm:ml-0 ml-2 font-bold mb-6 uppercase">
     Related Products 
@@ -387,7 +385,6 @@ const images = Array.isArray(product?.product_image)
               </button>
             </div>
 
-            {/* Image Section */}
             <div className="relative w-full aspect-square overflow-hidden">
               <img
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -395,14 +392,12 @@ const images = Array.isArray(product?.product_image)
                 alt={product.product_title}
               />
 
-              {/* SALE Badge */}
               {product.comparision_price && (
                 <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
                   SALE
                 </div>
               )}
 
-              {/* Discount % (right-top corner) */}
               {product?.comparision_price &&
                 product.comparision_price > product.product_price && (
                   <div className="absolute top-2 right-2 bg-yellow-400 text-gray-900 text-[11px] sm:text-xs font-bold px-2 py-1 rounded-full shadow-md">
@@ -416,19 +411,16 @@ const images = Array.isArray(product?.product_image)
                 )}
             </div>
 
-            {/* Product Details */}
             <div className="sm:p-4 p-2 flex flex-col gap-2">
               <h2 className="font-semibold text-lg text-gray-900 truncate group-hover:text-blue-600">
                 {product.product_title}
               </h2>
 
               <div className="flex items-center gap-3">
-                {/* Product Price */}
                 <p className="text-green-600 font-bold text-base sm:text-lg md:text-xl">
                   ₹{product.product_price}
                 </p>
 
-                {/* Comparison Price */}
                 {product.comparision_price && (
                   <p className="text-gray-400 line-through text-xs sm:text-sm md:text-sm">
                     ₹{product.comparision_price}

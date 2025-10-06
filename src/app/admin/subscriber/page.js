@@ -23,7 +23,7 @@ const Page = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
-      {/* Page Heading */}
+
       {loading ? (
              <div className="flex justify-center items-center h-96">
                <Loader className="animate-spin w-12 h-12 text-blue-500" />
@@ -35,7 +35,7 @@ const Page = () => {
         </p>
       </div>
 
-      {/* Search Bar */}
+    
       <div className="max-w-md mx-auto mb-10">
         <input
           type="text"
@@ -46,19 +46,19 @@ const Page = () => {
         />
       </div>
 
-      {/* Grid of Subscribers */}
+     
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredSubscribers.map((item) => (
           <div
             key={item._id}
             className="bg-white shadow-md hover:shadow-lg transition rounded-xl border border-gray-200 p-6 flex flex-col justify-between"
           >
-            {/* Email */}
+       
             <p className="flex items-center gap-2 text-gray-700 font-medium mb-3">
               <Mail className="w-4 h-4 text-indigo-500" /> {item.email}
             </p>
 
-            {/* Date */}
+  
             {item.createdAt && (
               <p className="flex items-center gap-2 text-sm text-gray-500 mb-3">
                 <Calendar className="w-4 h-4 text-indigo-400" />{" "}
@@ -66,7 +66,7 @@ const Page = () => {
               </p>
             )}
 
-            {/* Status Badge */}
+      
             <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700 self-start">
               Active Subscriber
             </span>

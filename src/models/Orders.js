@@ -37,7 +37,7 @@ const OrderSchema = new mongoose.Schema({
   },
   returnStatus: {
     type: String,
-    default: "pending", // pending, requested, in process, returned
+    default: "", 
 
   },
   deliveredAt: {
