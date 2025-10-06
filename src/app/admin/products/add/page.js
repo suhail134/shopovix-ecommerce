@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { LoaderCircle } from 'lucide-react'
 import { Suspense } from 'react'
-import error from '@/component/Error'
+import Error from '@/component/Error'
 import Message from '@/component/Message'
 
 const AddProductPage = () => {

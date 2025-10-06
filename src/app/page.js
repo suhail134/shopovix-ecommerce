@@ -6,7 +6,7 @@ import Subscriber from "@/component/Subscriber";
 import { useRouter } from "next/navigation";
 import { Loader, LoaderCircle, LoaderPinwheel, RefreshCw, Wallet, Tags, HeartPlus } from "lucide-react";
 import Head from "next/head";
-import error from "@/component/Error";
+import Error from "@/component/Error";
 export default function Home() {
   const [collection, setCollection] = useState([])
   const [products, setProducts] = useState([])

@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { LoaderCircle, User, Mail, HeartPlus, ChevronDown, ChevronUp } from "lucide-react";
 import ReactStars from "react-stars";
 import ReviewsDisplay from "@/component/CustomerReviews";
-import error from "@/component/Error";
+import Error from "@/component/Error";
 
 const Page = ({ params }) => {
   const { category } = params;

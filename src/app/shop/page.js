@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Loader, HeartPlus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import error from '@/component/Error';
+import Error from '@/component/Error';
 const Page = () => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)

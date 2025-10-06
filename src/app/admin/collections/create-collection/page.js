@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { LoaderCircle } from "lucide-react";
 import Message from "@/component/Message";
-import error from "@/component/Error";
+import Error from "@/component/Error";
 const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();

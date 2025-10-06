@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import { HeartPlus } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import error from "./Error";
+import Error from "./Error";
 import React from "react";
 
 

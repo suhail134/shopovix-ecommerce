@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { HeartPlus } from "lucide-react";
 import { useRouter } from "next/navigation";
-import error from "./Error";
+import Error from "./Error";
 export default function Wishlist() {
   const [wishlist, setWishlist] = useState([]);
   const { data: session, status } = useSession();

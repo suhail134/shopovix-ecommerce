@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-const error = ({ error, onClose }) => {
+const Error = ({ error, onClose }) => {
   const [timeLeft, setTimeLeft] = useState(3);
   const [show, setShow] = useState(false);
 
@@ -39,7 +39,7 @@ const error = ({ error, onClose }) => {
           show ? "opacity-100 scale-100" : "opacity-0 scale-90"
         }`}
       >
-        <p className="text-red-600 font-bold text-lg mb-4">{error}</p>
+        <p className="text-red-600 font-bold text-lg mb-4">{error?.message}</p>
         <button
           onClick={handleClose}
           className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition transform hover:scale-105"
@@ -54,4 +54,4 @@ const error = ({ error, onClose }) => {
   );
 };
 
-export default error;
+export default Error;
