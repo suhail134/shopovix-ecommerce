@@ -52,31 +52,31 @@ export default Page
 
 
 
-export const metadata = {
-  title: "Shopovix - Your Collection",
-  description: "Manage and view all product collections in your Shopovix store. Add, edit, or remove collections easily from the admin panel.",
-  keywords: ["Shopovix", "Admin", "Collections", "Manage Products", "Store Admin"],
-  authors: [{ name: "Shopovix Admin", url: "https://shopovix-ecommerce-wyzu.vercel.app" }],
-  openGraph: {
-    title: "Shopovix - Your Collection",
-    description: "Manage and view all product collections in your Shopovix store. Add, edit, or remove collections easily from the admin panel.",
-    url: "https://shopovix-ecommerce-wyzu.vercel.app/admin/collections",
-    siteName: "Shopovix Admin",
-    images: [
-      {
-        url: "/og-admin-collections.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Shopovix - Your Collection",
-    description: "Manage and view all product collections in your Shopovix store. Add, edit, or remove collections easily from the admin panel.",
-    images: ["/og-admin-collections.png"],
-    creator: "@ardsuhail",
-  },
-};
+// export const metadata = {
+//   title: "Shopovix - Your Collection",
+//   description: "Manage and view all product collections in your Shopovix store. Add, edit, or remove collections easily from the admin panel.",
+//   keywords: ["Shopovix", "Admin", "Collections", "Manage Products", "Store Admin"],
+//   authors: [{ name: "Shopovix Admin", url: "https://shopovix-ecommerce-wyzu.vercel.app" }],
+//   openGraph: {
+//     title: "Shopovix - Your Collection",
+//     description: "Manage and view all product collections in your Shopovix store. Add, edit, or remove collections easily from the admin panel.",
+//     url: "https://shopovix-ecommerce-wyzu.vercel.app/admin/collections",
+//     siteName: "Shopovix Admin",
+//     images: [
+//       {
+//         url: "/og-admin-collections.png",
+//         width: 1200,
+//         height: 630,
+//       },
+//     ],
+//     locale: "en_US",
+//     type: "website",
+//   },
+//   twitter: {
+//     card: "summary_large_image",
+//     title: "Shopovix - Your Collection",
+//     description: "Manage and view all product collections in your Shopovix store. Add, edit, or remove collections easily from the admin panel.",
+//     images: ["/og-admin-collections.png"],
+//     creator: "@ardsuhail",
+//   },
+// };
