@@ -8,12 +8,14 @@ import { Loader, LoaderCircle, LoaderPinwheel, RefreshCw, Wallet, Tags, HeartPlu
 import Hero from "@/component/Hero";
 import Head from "next/head";
 import Error from "@/component/Error";
+import Message from "@/component/Message";
 export default function Home() {
   const [collection, setCollection] = useState([])
   const [products, setProducts] = useState([])
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null)
   const router = useRouter()
 
   useEffect(() => {

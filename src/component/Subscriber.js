@@ -1,10 +1,12 @@
 "use client"
 import React, { useState } from "react"
 import { ArrowRight } from "lucide-react"
-
+import Message from "./Message"
+import Error from "./Error"
 const Subscriber = () => {
   const [email, setEmail] = useState({ email: "" });
-
+ const [message, setMessage] = useState(null)
+ const [error, setError] = useState(null)
   const handleChange = (e) => {
     setEmail({ ...email, [e.target.name]: e.target.value });
   };
@@ -12,7 +14,7 @@ const Subscriber = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email.email) {
-      alert("Email is required");
+      setError("Email is required");
       return;
     }
 
@@ -34,10 +36,10 @@ const Subscriber = () => {
       .then((response) => response.json())
       .then((result) => {
         if (result.success) {
-          alert(result.message);
+          setMessage(result.message);
           setEmail({ email: "" }); // ✅ Reset sahi tarike se
         } else {
-          alert("Something went wrong");
+          setError("Something went wrong");
         }
       })
       .catch((error) => console.error(error));
@@ -45,6 +47,8 @@ const Subscriber = () => {
 
   return (
     <div className="w-full bg-white py-12 px-4">
+      {error && <Error error={error} onClose={()=>setError(null)} />}
+      {message && <Message message={message} onClose={()=>setMessage(null)} />}
       <div className="max-w-2xl mx-auto text-center">
         {/* Heading */}
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">

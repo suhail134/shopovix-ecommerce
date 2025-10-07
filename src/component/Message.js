@@ -39,7 +39,7 @@ const Message = ({ message, onClose }) => {
           show ? "opacity-100 scale-100" : "opacity-0 scale-90"
         }`}
       >
-        <p className="text-red-600 font-bold text-lg mb-4">{message}</p>
+        <p className="text-green-600 font-bold text-lg mb-4">{message}</p>
         <button
           onClick={handleClose}
           className="bg-blue-600 cursor-pointer  text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition transform hover:scale-105"
