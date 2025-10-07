@@ -98,7 +98,7 @@ export async function POST(req) {
         key_id: process.env.RAZORPAY_KEY,
         key_secret: process.env.RAZORPAY_SECRET
       });
-
+console.log("Razorpay key loaded:", process.env.RAZORPAY_KEY ? "✅" : "❌");
       let options = {
         amount: amount * 100, 
         currency: "INR"

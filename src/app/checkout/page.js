@@ -92,7 +92,7 @@ const CheckOut = () => {
             setPayLoading(false);
             return;
         }
-
+console.log("Razorpay key loaded:", process.env.NEXT_PUBLIC_RAZORPAY_KEY ? "✅" : "❌");
         // Total amount calculate karna
         const amount = products.reduce((acc, p) => acc + (p.product_price * p.quantity), 0);
 
