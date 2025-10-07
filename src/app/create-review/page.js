@@ -7,12 +7,16 @@ import ReviewsDisplay from "@/component/CustomerReviews";
 import { useRouter } from 'next/navigation';
 import { LoaderCircle, Camera, AlertTriangle } from 'lucide-react';
 import { Suspense } from 'react'
+import Error from '@/component/Error';
+import Message from '@/component/Message';
 const Createreview = () => {
 
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(false)
   const searchParams = useSearchParams();
   const productId = searchParams.get("products");
+  const [error, setError] = useState(null)
+  const [message, setMessage] = useState(null)
   const router = useRouter()
   useEffect(() => {
 
@@ -105,17 +109,20 @@ const Createreview = () => {
             router.push(`/singleProduct/${product._id}`);
           }, 500);
         } else {
-          alert("server error")
+          setError(result.meesage || "server error")
+          setLoading(false)
         }
       })
       .catch((error) => {
-        alert(error.message)
+        setError(error.message)
+        setLoading(false)
       });
 
   }
   return (
     <Suspense fallback={<div className="flex justify-center items-center h-96"><LoaderCircle className="animate-spin text-blue-500 w-20 h-20" />
  </div>}>
+ {error && <Error error={error} onClose={()=>setError(null)}  />}
       {loading && (
         <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
           <LoaderCircle className="animate-spin text-blue-500 w-20 h-20" />

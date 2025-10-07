@@ -42,7 +42,7 @@ const Message = ({ message, onClose }) => {
         <p className="text-red-600 font-bold text-lg mb-4">{message}</p>
         <button
           onClick={handleClose}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition transform hover:scale-105"
+          className="bg-blue-600 cursor-pointer  text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition transform hover:scale-105"
         >
           OK
         </button>

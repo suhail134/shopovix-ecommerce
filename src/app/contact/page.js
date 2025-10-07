@@ -1,12 +1,15 @@
 "use client";
 import { useState } from "react";
-
+import Message from "@/component/Message";
+import Error from "@/component/Error";
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const [error, setError] = useState(null)
+  const [message, setMessage] = useState(null)
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,19 +37,22 @@ export default function Contact() {
       .then((response) => response.json())
       .then((result) =>{ 
         if(result.success){ 
-        alert(result.message);
+        setMessage(result.message);
         setFormData({
           name:"",
           email:"",
           message:""
         })} else{
-          alert("Something went wrong");
+          setError(result.message || "Something went wrong");
         }
       })
       .catch((error) => console.error(error));
   };
 
   return (
+    <>
+    {error && <Error error={error} onClose={()=>setError(null)} />}
+    {message && <Message message={message} onClose={()=>setMessage(null)} />}
     <main className=" min-h-screen py-16 px-4 md:px-20">
       {/* Heading */}
       <section className="text-center mb-12">
@@ -107,12 +113,13 @@ export default function Contact() {
 
           <button 
             type="submit"
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 w-full"
+            className="bg-red-600 cursor-pointer hover:bg-red-700 active:bg-red-400 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 w-full"
           >
             Send Message
           </button>
         </form>
       </section>
     </main>
+    </>
   );
 }

@@ -27,7 +27,7 @@ const Navbar = () => {
   if (loading) return null;
 
   return (
-    <nav className="bg-slate-100 sm:h-32 h-37 shadow-md w-full z-50 backdrop-blur-md px-4 lg:px-10 py-3">
+    <nav className="bg-slate-100  mb-2 sm:h-32 h-37 shadow-md w-full z-50 backdrop-blur-md px-4 lg:px-10 py-3">
       <div className="flex items-center justify-between mb-2">
         {/* Hamburger for mobile */}
         <div className="sm:hidden">

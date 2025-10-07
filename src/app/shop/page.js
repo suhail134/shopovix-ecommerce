@@ -57,13 +57,14 @@ const Page = () => {
               ? prev.filter((id) => id !== product._id) // remove from wishlist
               : [...prev, product._id]                 // add to wishlist
           );
-          alert(isInWishlist ? "Removed from wishlist" : "Added to wishlist");
+          // alert(isInWishlist ? "Removed from wishlist" : "Added to wishlist");
         } else {
          setError(result.message || "Server Error Please try again later")
         }
       })
       .catch((error) => {
-        alert("Please login to add to wishlist");
+        // alert("Please login to add to wishlist");
+        setError("Server Error Please Try Again")
         console.error(error);
       });
   };

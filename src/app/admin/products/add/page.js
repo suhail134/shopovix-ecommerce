@@ -47,7 +47,7 @@ const [deletedImages, setDeletedImages] = useState([]); // images to delete
               price: data.product.product_price,
               category: data.product.category,
               comparision_price: data.product.comparision_price
-
+          
             });
             setExistingImages(data.product.product_image);
             // setPreview(data.product.product_image);
@@ -116,15 +116,18 @@ const removeNewImage = (index) => {
       const result = await response.json();
 
       if (result.success) {
-        setloading(false);
+        setloading(false)
         // alert(`Product ${id ? "updated" : "created"} successfully!`);
-        router.push("/admin/products");
         setMessage(`Product ${id ? "updated" : "created"} successfully!`)
+        router.push("/admin/products");
       } else {
         // alert(result.message || "Something went wrong");
+        setloading(false)
         setError(result.message || "Something Went Wrong")
+
       }
     } catch (error) {
+      setloading(false)
       console.error("Error adding/updating Product:", error);
       // alert("Server error. Please try again.");
       setError(error.message || "Server error. Please try again.")

@@ -102,7 +102,7 @@ export default function OrderDetail() {
                 className="w-20 h-20 object-cover rounded-lg border border-gray-200 dark:border-gray-700"
               />
               <div>
-                <p className="font-medium text-gray-800 dark:text-gray-100">
+                <p className="font-medium text-gray-800 sm:line-clamp-none line-clamp-2 dark:text-gray-100">
                   {product.product_title}
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">

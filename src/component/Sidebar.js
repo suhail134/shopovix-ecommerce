@@ -113,7 +113,7 @@ const Sidebar = ({ sidebarOpen, cart, setSidebarOpen }) => {
       ) : (
         <>
           {/* Cart Items */}
-          <div className="overflow-y-auto max-h-[70vh] p-3 sm:p-4 custom-scrollbar">
+          <div className="overflow-y-auto max-h-[60vh] p-3 sm:p-4 custom-scrollbar">
             {cart.map((item, idx) => (
               <div
                 key={idx}

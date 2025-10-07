@@ -30,33 +30,30 @@ const Page = ({ params }) => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null)
   // Fetch single product and related products
-  useEffect(() => {
-    if (!id) return;
-setLoading(true)
-    fetch(`/api/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setProduct(data.product);
+useEffect(() => {
+  if (!id) return;
+  setLoading(true);
 
-          //  Get ALL products and filter by category on frontend
-          fetch("/api/products")
-            .then((res) => res.json())
-            .then((rdata) => {
-              const filtered = rdata.products.filter(
-                (p) =>
-                  p.category?.toLowerCase() === data.product.category?.toLowerCase() &&
-                  p._id !== data.product._id
-              );
+  const startTime = Date.now();
 
-              setRelatedProducts(filtered);
-            });
-        }
-        setLoading(false)
-      })
-      .catch(() => setLoadingProduct(false));
+  fetch(`/api/products/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        setProduct(data.product);
+        return fetch("/api/products").then(res => res.json());
+      }
+    })
+    .then(rdata => {
+      const filtered = rdata.products.filter(p =>
+        p.category?.toLowerCase() === product.category?.toLowerCase() &&
+        p._id !== product._id
+      );
+      setRelatedProducts(filtered);
+    })
+   
+}, [id]);
 
-  }, [id]);
 
   useEffect(() => {
     setLoading(true);
@@ -150,7 +147,7 @@ const images = Array.isArray(product?.product_image)
   };
 
 
-  if (!product || loading) {
+  if (!product || !products || loading) {
     return (
       <p className="flex justify-center h-[80vh] relative  items-center" ><LoaderCircle className="text-cyan-800 animate-spin w-20 h-20 " /></p>
     );
@@ -185,8 +182,8 @@ const images = Array.isArray(product?.product_image)
     </button>
   );
 
-  // Use first 20 products for related & people also viewed
-  const displayProducts = products.slice(0, 20);
+
+
 
   const averageRating = (reviews.length > 0 ? reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length : 0).toFixed(1)
   // Reviews ka average nikalna
@@ -339,8 +336,8 @@ const images = Array.isArray(product?.product_image)
           <div className=" sm:hidden flex   sticky bottom-3 mt-8 gap-2   mb-6">
             <button
               onClick={() => addToCart(product)}
-              className="relative w-full  bg-green-200 py-3 rounded-lg border border-green-700 text-black font-medium 
-  hover:bg-green-400 active:bg-green-400 focus:bg-green-400 hover:scale-105 transition transform"
+              className="relative w-full   py-3 rounded-lg border border-green-700 text-black font-medium 
+  hover:bg-green-400 active:bg-green-400 active:text-white focus:bg-green-400 hover:scale-105 transition transform"
             >
               🛒 Add to Cart
             </button>

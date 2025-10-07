@@ -51,7 +51,7 @@ useEffect(() => {
               ? prev.filter((id) => id !== product._id) // remove from wishlist
               : [...prev, product._id]                 // add to wishlist
           );
-          alert(isInWishlist ? "Removed from wishlist" : "Added to wishlist");
+          // alert(isInWishlist ? "Removed from wishlist" : "Added to wishlist");
         } else {
           setError(result.message || "Something went wrong");
         }
