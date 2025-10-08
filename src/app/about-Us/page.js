@@ -72,7 +72,7 @@ export default function AboutUs() {
       <section className="text-center">
         <h2 className="text-3xl font-semibold   mb-4">Get in Touch</h2>
         <p className="text-gray-600 text-lg mb-2">Email: <a href="mailto:example@gmail.com" className="text-red-600 underline">example@gmail.com</a></p>
-        <p className="text-gray-600 text-lg">Phone: <span className=" ">+91 98765 43210</span></p>
+        <p className="text-gray-600 text-lg">Phone: <span className=" ">+91 xxxxxxxxxx</span></p>
       </section>
     </main>
   );

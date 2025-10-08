@@ -66,7 +66,7 @@ const Page = () => {
     e.preventDefault();
    setLoading(true);
     if (!id && images.length === 0) {
-      alert("Please select an image");
+      setError("Please select an image");
       return;
     }
 
@@ -93,10 +93,13 @@ const Page = () => {
         router.push("/admin/collections/Your-collections");
       } else {
         setError(result.message || "Something went wrong");
+        setLoading(false)
       }
     } catch (error) {
+      
       console.error("Error adding/updating collection:", error);
       setError("Server error. Please try again.");
+      setLoading(false)
     }
   };
 
@@ -104,13 +107,13 @@ const Page = () => {
     <Suspense   fallback={ <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
           <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
         </div>}>
-        {error && <Error error={error} onClose={()=>setError(null)} />}
-        {message && <Message message={message} onClose={()=>setMessage(null)} />}
       {loading && (
         <div className="fixed inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50">
           <LoaderCircle className="animate-spin text-blue-600 w-20 h-20" />
         </div>
       )}
+      {error && <Error error={error} onClose={()=>setError(null)} />}
+      {message && <Message message={message} onClose={()=>setMessage(null)} />}
 
       <div className="max-w-2xl mx-auto p-8 bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl shadow-xl border border-gray-200">
         <div className="px-4 sm:px-6 lg:px-10 py-6">

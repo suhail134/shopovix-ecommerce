@@ -99,7 +99,7 @@ export default function Home() {
          <img src="/Shopovix.png"  alt="banner"  className="" />
           </div>
          <Link href="/shop">
-          <button className="bg-white cursor-pointer relative xl:bottom-70 xl:left-10 bottom-20 left-5 sm:bottom-40 sm:left-6 md:bottom-40 lg:bottom-50 lg:left-10 md:left-8 active:bg-green-400 active:text-white hover:text-white hover:bg-green-400 text-sm sm:text-base lg:text-xl text-black font-bold sm:py-2 sm:px-4 rounded-lg px-2 py-1 shadow-md transition-all">
+          <button className="bg-white cursor-pointer relative xl:bottom-70 xl:left-10 bottom-19 left-4 sm:bottom-40 sm:left-6 md:bottom-40 lg:bottom-50 lg:left-10 md:left-8 active:bg-green-400 active:text-white hover:text-white hover:bg-green-400 text-sm sm:text-base lg:text-xl text-black font-bold sm:py-2 sm:px-4 rounded-lg px-2 py-1 shadow-md transition-all">
             Shop Now
           </button>
         </Link>

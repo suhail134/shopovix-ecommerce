@@ -46,7 +46,7 @@ export default function ThankYouPage() {
         <div className="bg-gray-100 rounded-xl p-5 text-left space-y-3 mb-6">
           <div className="flex justify-between">
             <span className="font-semibold text-gray-700">Order ID:</span>
-            <span className="text-gray-900">{orderId.slice(0,6)}</span>
+            <span className="text-gray-900">{orderId.slice(-6)}</span>
           </div>
           <div className="flex justify-between">
             <span className="font-semibold text-gray-700">Total Amount:</span>
